@@ -1648,7 +1648,38 @@
       </div>
     </div>
   </div>
+<!-- ==================== STORY PAGE (GENÉRICA) ==================== -->
+<div class="page" id="page-story">
+  <div class="service-detail">
+    <div class="service-detail-hero">
+      <img id="storyHeroImage" src="" alt="Story">
+      <div class="hero-overlay"></div>
+      <div class="service-detail-hero-content">
+        <h1 id="storyHeroTitle">História</h1>
+        <p id="storyHeroSubtitle"></p>
+      </div>
+    </div>
 
+    <div class="service-detail-content">
+      <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
+        <i class="fa-solid fa-arrow-left"></i> Voltar
+      </a>
+
+      <h2 id="storyPageTitle">História</h2>
+      <div id="storyPageText"></div>
+
+      <div class="section-header" style="margin-top:60px;">
+        <h2 style="font-size:1.6rem;">Mais fotos</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="galeria-grid" id="storyGallery"></div>
+    </div>
+  </div>
+</div>
+
+
+  
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
     <div class="footer-content">
@@ -1873,27 +1904,98 @@
         .join('');
 
       // Galeria + Serviços
-      loadGallery();
-      loadServices();
+   function loadGallery() {
+  const container = document.getElementById('galleryContainer');
+  const badge = document.getElementById('instaBadge');
 
-      // Botões da seção "Vamos Conversar"
-      document.getElementById('contactLinks').innerHTML =
-  `<a href="https://wa.me/` + siteData.whatsapp + `" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>` +
-  `<a href="https://instagram.com/` + siteData.instagram + `" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` +
-  `<a href="mailto:` + siteData.email + `" class="contato-btn"><i class="fa-regular fa-envelope"></i> E-mail</a>` +
-  `<a href="#" class="contato-btn" onclick="navigateTo(&quot;agendamento&quot;); return false;"><i class="fa-regular fa-calendar"></i> Agendar</a>`;
+  if (siteData.galleryMode === 'instagram' && siteData.instagramUsername) {
+    badge.style.display = 'inline-flex';
+    badge.innerHTML = '<i class="fa-brands fa-instagram"></i> Fotos de @' + siteData.instagramUsername;
 
-      // Contato page links
-      document.getElementById('contactWhatsappLink').href = 'https://wa.me/' + siteData.whatsapp;
-      document.getElementById('contactWhatsappLink').textContent = formatPhone(siteData.whatsapp);
+    container.innerHTML =
+      '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;">' +
+        '<p style="margin-bottom: 30px; font-size: 1.05rem; font-weight: 300;">Veja meu trabalho completo no Instagram</p>' +
+        '<a href="https://instagram.com/' + siteData.instagramUsername + '" class="btn-primary" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Ver Galeria Completa</a>' +
+        '<div style="margin-top: 40px;"><iframe src="https://www.instagram.com/' + siteData.instagramUsername + '/embed" width="100%" height="600" frameborder="0" scrolling="no"></iframe></div>' +
+      '</div>';
+    return;
+  }
 
-      document.getElementById('contactEmailLink').href = 'mailto:' + siteData.email;
-      document.getElementById('contactEmailLink').textContent = siteData.email;
+  badge.style.display = 'none';
 
-      document.getElementById('contactInstaLink').href = 'https://instagram.com/' + siteData.instagram;
-      document.getElementById('contactInstaLink').textContent = '@' + siteData.instagram;
+  const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
 
-      document.getElementById('socialInsta').href = 'https://instagram.com/' + siteData.instagram;
+  container.innerHTML = items.map(function(item, idx) {
+    const hasStory = !!(item.story || item.storyTitle || item.storyText || (item.storyImages && item.storyImages.length));
+    const click = hasStory ? ' onclick="openStory(' + idx + '); return false;"' : '';
+
+    // quando não tiver story, não vira link (só imagem)
+    const wrapperStart = hasStory ? '<a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"' + click + '>' : '';
+    const wrapperEnd = hasStory ? '</a>' : '';
+
+    return '<div class="galeria-item">' +
+      wrapperStart +
+        '<img src="' + item.url + '" alt="' + (item.title || 'Foto') + '" loading="lazy">' +
+        '<div class="galeria-overlay"><h3>' + (item.title || '') + '</h3></div>' +
+      wrapperEnd +
+    '</div>';
+  }).join('');
+}
+
+function normalizeImagePath(p) {
+  if (!p) return '';
+  // se vier "assets/uploads/xxx.jpg", força "/assets/uploads/xxx.jpg"
+  if (p.startsWith('assets/')) return '/' + p;
+  return p;
+}
+
+function openStory(index) {
+  const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
+  const item = items[index];
+  if (!item) return;
+
+  // Hero
+  const heroImg = document.getElementById('storyHeroImage');
+  const heroTitle = document.getElementById('storyHeroTitle');
+  const heroSub = document.getElementById('storyHeroSubtitle');
+
+  const pageTitle = document.getElementById('storyPageTitle');
+  const pageText = document.getElementById('storyPageText');
+  const storyGallery = document.getElementById('storyGallery');
+
+  const title = item.storyTitle || item.title || 'História';
+  const subtitle = item.story ? ('/' + item.story) : '';
+
+  if (heroImg) heroImg.src = normalizeImagePath(item.url);
+  if (heroTitle) heroTitle.textContent = title;
+  if (heroSub) heroSub.textContent = subtitle;
+
+  if (pageTitle) pageTitle.textContent = title;
+
+  if (pageText) {
+    const txt = item.storyText || '';
+    pageText.innerHTML = txt
+      .split('\n')
+      .filter(t => t.trim())
+      .map(t => '<p>' + t + '</p>')
+      .join('') || '<p style="color:#888; font-weight:300;">(Texto da história ainda não preenchido)</p>';
+  }
+
+  // galeria extra da história
+  const extra = Array.isArray(item.storyImages) ? item.storyImages : [];
+  if (storyGallery) {
+    storyGallery.innerHTML = extra.map(function(src) {
+      const s = (typeof src === 'string') ? src : (src && src.image ? src.image : '');
+      const finalSrc = normalizeImagePath(s);
+      if (!finalSrc) return '';
+      return '<div class="galeria-item">' +
+        '<img src="' + finalSrc + '" alt="' + title + '" loading="lazy">' +
+      '</div>';
+    }).join('') || '<div style="grid-column:1/-1; text-align:center; color:#999; font-weight:300;">(Sem fotos extras)</div>';
+  }
+
+  navigateTo('story');
+}
 
       // CTA section
       const ctaTitleEl = document.querySelector('.contato-section h2');
