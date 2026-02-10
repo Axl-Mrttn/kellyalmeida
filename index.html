@@ -1996,7 +1996,7 @@
       const grid = document.getElementById('servicosGrid');
       grid.innerHTML = servicesData.map(function(s) {
         const img = (siteData.serviceImages && siteData.serviceImages[s.id]) || ('https://via.placeholder.com/800x600?text=' + encodeURIComponent(s.title));
-        return '<div class="servico-card fade-in" onclick="navigateTo(\\'service-' + s.id + '\\')">' +
+return '<div class="servico-card fade-in" onclick="navigateTo(\'service-' + s.id + '\'); return false;">' +
           '<div class="servico-card-image">' +
             '<img src="' + img + '" alt="' + s.title + '">' +
             '<div class="servico-icon-float"><i class="' + s.icon + '"></i></div>' +
