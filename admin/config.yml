@@ -2,81 +2,51 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "uploads"
-public_folder: "/uploads"
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
-site_url: "/"
-display_url: "/"
-
-publish_mode: editorial_workflow
+publish_mode: simple
 
 collections:
   - name: "site"
     label: "Site"
     files:
-      - name: "content"
-        label: "Conteúdo do Site"
-        file: "data/site.json"
-        format: "json"
+      - file: "data/site.json"
+        label: "Dados do Site"
+        name: "site"
         fields:
-          - { label: "Nome do site", name: "siteName", widget: "string", required: true }
-          - { label: "Título do Hero", name: "heroTitle", widget: "string", required: true }
-          - { label: "Subtítulo do Hero", name: "heroSubtitle", widget: "string", required: true }
+          - { label: "Nome do Site", name: "siteName", widget: "string" }
+          - { label: "Título Hero", name: "heroTitle", widget: "string" }
+          - { label: "Subtítulo Hero", name: "heroSubtitle", widget: "string" }
 
-          - { label: "Imagem do Sobre", name: "aboutImage", widget: "image", required: true }
-          - { label: "Texto do Sobre", name: "aboutText", widget: "text", required: true }
+          - { label: "Imagem Sobre (URL)", name: "aboutImage", widget: "string" }
+          - { label: "Texto Sobre", name: "aboutText", widget: "text" }
 
-          - label: "Modo da Galeria"
+          - label: "Modo Galeria"
             name: "galleryMode"
             widget: "select"
             options:
-              - { label: "Manual (fotos)", value: "manual" }
-              - { label: "Instagram (embed)", value: "instagram" }
-            default: "manual"
-            required: true
+              - { label: "Manual", value: "manual" }
+              - { label: "Instagram", value: "instagram" }
 
-          - { label: "Instagram Username (para modo Instagram)", name: "instagramUsername", widget: "string", required: false }
+          - { label: "Instagram Username (galeria)", name: "instagramUsername", widget: "string", required: false }
 
-          - label: "Galeria (modo manual)"
+          - label: "Galeria (Manual)"
             name: "gallery"
             widget: "list"
-            required: false
+            summary: "{{fields.title}}"
             fields:
-              - { label: "Imagem", name: "url", widget: "image", required: true }
-              - { label: "Título", name: "title", widget: "string", required: false }
+              - { label: "URL da imagem", name: "url", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
 
-          - { label: "WhatsApp (somente números, ex: 5511999999999)", name: "whatsapp", widget: "string", required: true }
-          - { label: "Instagram (sem @)", name: "instagram", widget: "string", required: true }
-          - { label: "E-mail", name: "email", widget: "string", required: true }
+          - { label: "WhatsApp (somente números, com DDI)", name: "whatsapp", widget: "string" }
+          - { label: "Instagram (sem @)", name: "instagram", widget: "string" }
+          - { label: "E-mail", name: "email", widget: "string" }
 
-          - { label: "Título CTA", name: "ctaTitle", widget: "string", required: true }
-          - { label: "Subtítulo CTA", name: "ctaSubtitle", widget: "string", required: true }
+          - { label: "Título CTA", name: "ctaTitle", widget: "string" }
+          - { label: "Subtítulo CTA", name: "ctaSubtitle", widget: "string" }
 
-          - { label: "Texto do Footer", name: "footerText", widget: "text", required: true }
-
-          - label: "Cores"
-            name: "colors"
-            widget: "object"
-            fields:
-              - { label: "Primária", name: "primary", widget: "string", required: true }
-              - { label: "Secundária", name: "secondary", widget: "string", required: true }
-              - { label: "Destaque", name: "accent", widget: "string", required: true }
-
-          - label: "Hero Images (slideshow)"
-            name: "heroImages"
-            widget: "list"
-            fields:
-              - { label: "Imagem", name: "image", widget: "image" }
-            required: true
-
-          - label: "Imagens dos Serviços"
-            name: "serviceImages"
-            widget: "object"
-            fields:
-              - { label: "Partos", name: "partos", widget: "image", required: true }
-              - { label: "Gestante", name: "gestante", widget: "image", required: true }
-              - { label: "Família", name: "familia", widget: "image", required: true }
-              - { label: "Especiais", name: "especiais", widget: "image", required: true }
+          - { label: "Texto do Footer", name: "footerText", widget: "text" }
 
           - label: "Detalhes dos Serviços"
             name: "serviceDetails"
@@ -86,34 +56,56 @@ collections:
                 name: "partos"
                 widget: "object"
                 fields:
-                  - { label: "Título", name: "title", widget: "string", required: true }
-                  - { label: "Subtítulo", name: "subtitle", widget: "string", required: true }
-                  - { label: "Texto", name: "text", widget: "text", required: true }
-                  - { label: "Features (formato: Título|Descrição||Título|Descrição ...)", name: "features", widget: "text", required: true }
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Subtítulo", name: "subtitle", widget: "string" }
+                  - { label: "Texto", name: "text", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
               - label: "Gestante"
                 name: "gestante"
                 widget: "object"
                 fields:
-                  - { label: "Título", name: "title", widget: "string", required: true }
-                  - { label: "Subtítulo", name: "subtitle", widget: "string", required: true }
-                  - { label: "Texto", name: "text", widget: "text", required: true }
-                  - { label: "Features (formato: Título|Descrição||Título|Descrição ...)", name: "features", widget: "text", required: true }
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Subtítulo", name: "subtitle", widget: "string" }
+                  - { label: "Texto", name: "text", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
               - label: "Família"
                 name: "familia"
                 widget: "object"
                 fields:
-                  - { label: "Título", name: "title", widget: "string", required: true }
-                  - { label: "Subtítulo", name: "subtitle", widget: "string", required: true }
-                  - { label: "Texto", name: "text", widget: "text", required: true }
-                  - { label: "Features (formato: Título|Descrição||Título|Descrição ...)", name: "features", widget: "text", required: true }
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Subtítulo", name: "subtitle", widget: "string" }
+                  - { label: "Texto", name: "text", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
               - label: "Especiais"
                 name: "especiais"
                 widget: "object"
                 fields:
-                  - { label: "Título", name: "title", widget: "string", required: true }
-                  - { label: "Subtítulo", name: "subtitle", widget: "string", required: true }
-                  - { label: "Texto", name: "text", widget: "text", required: true }
-                  - { label: "Features (formato: Título|Descrição||Título|Descrição ...)", name: "features", widget: "text", required: true }
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Subtítulo", name: "subtitle", widget: "string" }
+                  - { label: "Texto", name: "text", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
+
+          - label: "Imagens do Hero (Slideshow)"
+            name: "heroImages"
+            widget: "list"
+            field: { label: "URL", name: "url", widget: "string" }
+
+          - label: "Imagens dos Serviços"
+            name: "serviceImages"
+            widget: "object"
+            fields:
+              - { label: "Partos (URL)", name: "partos", widget: "string" }
+              - { label: "Gestante (URL)", name: "gestante", widget: "string" }
+              - { label: "Família (URL)", name: "familia", widget: "string" }
+              - { label: "Especiais (URL)", name: "especiais", widget: "string" }
+
+          - label: "Cores"
+            name: "colors"
+            widget: "object"
+            fields:
+              - { label: "Primária", name: "primary", widget: "string" }
+              - { label: "Secundária", name: "secondary", widget: "string" }
+              - { label: "Destaque", name: "accent", widget: "string" }
