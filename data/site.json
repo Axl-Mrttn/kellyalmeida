@@ -35,7 +35,7 @@
       "features": "Batizados|Registro completo da cerimônia e dos detalhes especiais||Ensaios de Natal|Sessões temáticas para criar memórias mágicas||Aniversários|Do primeiro aninho às grandes celebrações||Acompanhamento|Sessões periódicas para documentar o crescimento"
     }
   },
-  "aboutImage": "/assets/uploads/1.jpg",
+  "aboutImage": "assets/uploads/1.jpg",
   "colors": {
     "primary": "#E8D5C4",
     "secondary": "#C9ADA1",
