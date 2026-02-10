@@ -55,7 +55,12 @@
     {
       "url": "assets/uploads/504119822_122173389104304405_2747545934594051560_n..jpg",
       "title": "Nasceu",
-      "story": "Um dia emocionante"
+      "story": "Um dia emocionante",
+      "storyTitle": "Nasceu",
+      "storyText": "Nesse dia, São Paulo amanheceu no caos. Chuva grossa, sirenes ao fundo, trânsito travado além do imaginável. Enquanto a cidade corria atrasada e impaciente, dentro de uma sala o tempo resolveu desacelerar. Entre respirações profundas, mãos que se apertavam e um silêncio cheio de expectativa, tudo foi ficando mais simples: só importava o agora.\n\nQuando nasceu, o mundo pareceu se reorganizar em torno daquele primeiro choro. O barulho lá fora perdeu a força, a pressa ficou pequena. Nos braços da mãe, cabia um começo inteiro: frágil, quente e definitivo. A cidade seguiu caótica, mas ali nasceu algo maior que qualquer desordem — um novo amor, desses que mudam tudo para sempre.",
+      "storyImages": [
+        "/assets/uploads/533029929_122180388134304405_5166508424345996994_n..jpg"
+      ]
     },
     {
       "url": "/assets/uploads/captura-de-tela-2026-02-10-às-09.22.34.png",
