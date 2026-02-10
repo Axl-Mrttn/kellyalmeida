@@ -1,0 +1,77 @@
+{
+  "siteName": "Kelly Almeida Fotografia",
+  "heroTitle": "Kelly Almeida",
+  "heroSubtitle": "Partos • Gestantes • Família",
+
+  "aboutImage": "/uploads/about.jpg",
+  "aboutText": "Olá! Sou Kelly, fotógrafa especializada em capturar os momentos mais preciosos da sua família.\n\nCada sessão é única e personalizada, sempre pensada com carinho para proporcionar conforto e segurança.",
+
+  "galleryMode": "manual",
+  "instagramUsername": "",
+
+  "gallery": [
+    { "url": "/uploads/galeria-1.jpg", "title": "Parto • João" },
+    { "url": "/uploads/galeria-2.jpg", "title": "Parto • Maria" },
+    { "url": "/uploads/galeria-3.jpg", "title": "Gestante • Ana" },
+    { "url": "/uploads/galeria-4.jpg", "title": "Família • Silva" },
+    { "url": "/uploads/galeria-5.jpg", "title": "Parto • Pedro" },
+    { "url": "/uploads/galeria-6.jpg", "title": "Parto • Laura" }
+  ],
+
+  "whatsapp": "5511999999999",
+  "instagram": "kellyalmeidafoto",
+  "email": "contato@kellyfoto.com",
+
+  "ctaTitle": "Vamos Conversar?",
+  "ctaSubtitle": "Entre em contato e vamos criar algo lindo juntas",
+
+  "footerText": "Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.",
+
+  "colors": {
+    "primary": "#E8D5C4",
+    "secondary": "#C9ADA1",
+    "accent": "#A0826D"
+  },
+
+  "heroImages": [
+    "/uploads/hero-1.jpg",
+    "/uploads/hero-2.jpg",
+    "/uploads/hero-3.jpg",
+    "/uploads/hero-4.jpg",
+    "/uploads/hero-5.jpg"
+  ],
+
+  "serviceImages": {
+    "partos": "/uploads/service-partos.jpg",
+    "gestante": "/uploads/service-gestante.jpg",
+    "familia": "/uploads/service-familia.jpg",
+    "especiais": "/uploads/service-especiais.jpg"
+  },
+
+  "serviceDetails": {
+    "partos": {
+      "title": "Fotografia de Parto",
+      "subtitle": "O primeiro encontro mais emocionante da vida",
+      "text": "A chegada de um bebê é um dos momentos mais transformadores e emocionantes na vida de uma família.\n\nTrabalho tanto em partos hospitalares quanto domiciliares, sempre priorizando o conforto e a privacidade da família.",
+      "features": "Sobreaviso 24h|Disponível a qualquer hora a partir da 37ª semana||Cobertura Completa|Do trabalho de parto aos primeiros momentos do bebê||Galeria Online|Fotos tratadas entregues em galeria privada||Hospital ou Domiciliar|Atendimento em qualquer local de nascimento"
+    },
+    "gestante": {
+      "title": "Ensaio Gestante",
+      "subtitle": "Eternize a espera mais linda da sua vida",
+      "text": "A gestação é um período mágico e passageiro.\n\nO ensaio gestante é recomendado entre a 28ª e 34ª semana de gestação.",
+      "features": "Consultoria de Look|Ajudo a escolher roupas e acessórios ideais||Locação Flexível|Estúdio, ao ar livre ou na sua casa||Família Inclusa|Papai e irmãozinhos participam sem custo extra||Edição Artística|Tratamento profissional em todas as fotos"
+    },
+    "familia": {
+      "title": "Ensaio de Família",
+      "subtitle": "Momentos que se tornam memórias para sempre",
+      "text": "As famílias crescem, mudam e se transformam.\n\nO que mais importa é a conexão entre vocês.",
+      "features": "Sessão Descontraída|Ambiente leve sem poses forçadas||Todos Participam|Pets, avós e amigos são bem-vindos||Lifestyle|Fotos naturais no estilo do dia a dia||Álbum Disponível|Opção de álbum impresso personalizado"
+    },
+    "especiais": {
+      "title": "Sessões Especiais",
+      "subtitle": "Momentos únicos que merecem um registro à altura",
+      "text": "Sessões personalizadas para momentos que fogem do comum, mas merecem ser eternizados.\n\nConte comigo para documentar com sensibilidade e arte.",
+      "features": "Smash the Cake|A diversão e a bagunça do primeiro bolinho do bebê||Batizados e Eventos|Cobertura completa de cerimônias e celebrações||Amamentação|Registro delicado do vínculo entre mãe e bebê||Acompanhamento|Sessões periódicas para documentar o crescimento"
+    }
+  }
+}
