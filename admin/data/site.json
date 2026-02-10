@@ -44,42 +44,11 @@
   "whatsapp": "5511999999999",
   "heroSubtitle": "Partos • Gestantes • Família",
   "siteName": "Kelly Almeida Fotografia",
-  "heroImages": [
-    "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1400",
-    "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1400",
-    "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1400",
-    "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1400",
-    "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1400"
-  ],
-  "gallery": [
-    {
-      "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800",
-      "title": "Parto · João"
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800",
-      "title": "Parto · Maria"
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800",
-      "title": "Gestante · Ana"
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800",
-      "title": "Família · Silva"
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800",
-      "title": "Parto · Pedro"
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800",
-      "title": "Parto · Laura"
-    }
-  ],
+  "heroImages": [],
+  "gallery": [],
   "instagram": "sarahfotografia",
   "galleryMode": "manual",
-  "aboutText": "Olá! Sou xxxxxxx, fotógrafa especializada em capturar os momentos mais preciosos da sua família.\n\nCada sessão é única e personalizada, sempre pensada com carinho.",
+  "aboutText": "Olá! Sou xxxxxxx, fotógrafa especializadas em capturar os momentos mais preciosos da sua família.\n\nCada sessão é única e personalizada, sempre pensada com carinho.",
   "email": "contato@sarahfoto.com",
   "heroTitle": "Kelly Almeida Fotografia"
 }
