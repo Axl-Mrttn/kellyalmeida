@@ -3,12 +3,11 @@ backend:
   branch: main
 
 media_folder: "assets/uploads"
-public_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 publish_mode: simple
 
 collections:
-  # ===================== SITE =====================
   - name: "site"
     label: "Site"
     files:
@@ -39,7 +38,25 @@ collections:
             fields:
               - { label: "Imagem", name: "url", widget: "image" }
               - { label: "Título (opcional)", name: "title", widget: "string", required: false }
-              - { label: "Story (slug da história)", name: "story", widget: "string", required: false, hint: "Ex: nasceu-o-marcos" }
+
+              # ✅ SLUG (pra linkar)
+              - {
+                  label: "Story (slug da história)",
+                  name: "story",
+                  widget: "string",
+                  required: false,
+                  hint: "Ex: nasceu-o-marcos (sem espaços/acentos)"
+                }
+
+              # ✅ CONTEÚDO DA PÁGINA (opcional, mas recomendo)
+              - { label: "Título da página (Story)", name: "storyTitle", widget: "string", required: false }
+              - { label: "Texto da história", name: "storyText", widget: "text", required: false }
+
+              - label: "Fotos da história (opcional)"
+                name: "storyImages"
+                widget: "list"
+                required: false
+                field: { label: "Imagem", name: "image", widget: "image" }
 
           - { label: "WhatsApp (somente números, com DDI)", name: "whatsapp", widget: "string" }
           - { label: "Instagram (sem @)", name: "instagram", widget: "string" }
@@ -61,7 +78,7 @@ collections:
                   - { label: "Título", name: "title", widget: "string" }
                   - { label: "Subtítulo", name: "subtitle", widget: "string" }
                   - { label: "Texto", name: "text", widget: "text" }
-                  - { label: "Features", name: "features", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
               - label: "Gestante"
                 name: "gestante"
@@ -70,7 +87,7 @@ collections:
                   - { label: "Título", name: "title", widget: "string" }
                   - { label: "Subtítulo", name: "subtitle", widget: "string" }
                   - { label: "Texto", name: "text", widget: "text" }
-                  - { label: "Features", name: "features", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
               - label: "Família"
                 name: "familia"
@@ -79,7 +96,7 @@ collections:
                   - { label: "Título", name: "title", widget: "string" }
                   - { label: "Subtítulo", name: "subtitle", widget: "string" }
                   - { label: "Texto", name: "text", widget: "text" }
-                  - { label: "Features", name: "features", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
               - label: "Especiais"
                 name: "especiais"
@@ -88,13 +105,12 @@ collections:
                   - { label: "Título", name: "title", widget: "string" }
                   - { label: "Subtítulo", name: "subtitle", widget: "string" }
                   - { label: "Texto", name: "text", widget: "text" }
-                  - { label: "Features", name: "features", widget: "text" }
+                  - { label: "Features (string no formato do site)", name: "features", widget: "text" }
 
           - label: "Imagens do Hero (Slideshow)"
             name: "heroImages"
             widget: "list"
-            field:
-              { label: "Imagem", name: "image", widget: "image" }
+            field: { label: "Imagem", name: "image", widget: "image" }
 
           - label: "Imagens dos Serviços"
             name: "serviceImages"
@@ -112,26 +128,3 @@ collections:
               - { label: "Primária", name: "primary", widget: "string" }
               - { label: "Secundária", name: "secondary", widget: "string" }
               - { label: "Destaque", name: "accent", widget: "string" }
-
-  # ===================== STORIES =====================
-  - name: "stories"
-    label: "Histórias"
-    folder: "data/stories"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    format: "json"
-    summary: "{{title}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Resumo curto (opcional)", name: "excerpt", widget: "text", required: false }
-      - { label: "Imagem de Capa", name: "coverImage", widget: "image" }
-      - label: "Texto da História"
-        name: "content"
-        widget: "text"
-        hint: "Quebra de linha vira parágrafo"
-      - label: "Galeria da História"
-        name: "gallery"
-        widget: "list"
-        field:
-          { label: "Imagem", name: "image", widget: "image" }
