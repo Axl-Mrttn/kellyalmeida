@@ -3032,5 +3032,30 @@
 
         window.addEventListener('scroll', handleScroll);
     </script>
+<!-- Netlify Identity (necessário pro login do CMS) -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+  // Se vier de invite/recovery e a pessoa caiu na home, manda pro /admin/
+  if (window.location.hash && (
+      window.location.hash.includes('invite_token=') ||
+      window.location.hash.includes('recovery_token=') ||
+      window.location.hash.includes('confirmation_token=')
+  )) {
+    window.location.href = '/admin/' + window.location.hash;
+  }
+
+  // Depois de logar, sempre manda pro /admin/
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
