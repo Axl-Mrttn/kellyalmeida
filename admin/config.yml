@@ -19,7 +19,7 @@ collections:
           - { label: "Título Hero", name: "heroTitle", widget: "string" }
           - { label: "Subtítulo Hero", name: "heroSubtitle", widget: "string" }
 
-          - { label: "Imagem Sobre (URL)", name: "aboutImage", widget: "string" }
+          - { label: "Imagem Sobre", name: "aboutImage", widget: "image" }
           - { label: "Texto Sobre", name: "aboutText", widget: "text" }
 
           - label: "Modo Galeria"
@@ -36,7 +36,7 @@ collections:
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "URL da imagem", name: "url", widget: "string" }
+              - { label: "Imagem", name: "url", widget: "image" }
               - { label: "Título", name: "title", widget: "string" }
 
           - { label: "WhatsApp (somente números, com DDI)", name: "whatsapp", widget: "string" }
@@ -91,16 +91,16 @@ collections:
           - label: "Imagens do Hero (Slideshow)"
             name: "heroImages"
             widget: "list"
-            field: { label: "URL", name: "url", widget: "string" }
+            field: { label: "Imagem", name: "image", widget: "image" }
 
           - label: "Imagens dos Serviços"
             name: "serviceImages"
             widget: "object"
             fields:
-              - { label: "Partos (URL)", name: "partos", widget: "string" }
-              - { label: "Gestante (URL)", name: "gestante", widget: "string" }
-              - { label: "Família (URL)", name: "familia", widget: "string" }
-              - { label: "Especiais (URL)", name: "especiais", widget: "string" }
+              - { label: "Partos", name: "partos", widget: "image" }
+              - { label: "Gestante", name: "gestante", widget: "image" }
+              - { label: "Família", name: "familia", widget: "image" }
+              - { label: "Especiais", name: "especiais", widget: "image" }
 
           - label: "Cores"
             name: "colors"
