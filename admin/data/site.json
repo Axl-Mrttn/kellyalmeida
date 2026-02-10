@@ -1,25 +1,14 @@
 {
-  "siteName": "Sarah Fotografia",
-  "heroTitle": "Sarah Fotografia",
-  "heroSubtitle": "Partos • Gestantes • Família",
-  "aboutImage": "https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800",
-  "aboutText": "Olá! Sou Sarah, fotógrafa especializada em capturar os momentos mais preciosos da sua família.\n\nCada sessão é única e personalizada, sempre pensada com carinho.",
-  "galleryMode": "manual",
-  "instagramUsername": "",
-  "gallery": [
-    { "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800", "title": "Parto · João" },
-    { "url": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800", "title": "Parto · Maria" },
-    { "url": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800", "title": "Gestante · Ana" },
-    { "url": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800", "title": "Família · Silva" },
-    { "url": "https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800", "title": "Parto · Pedro" },
-    { "url": "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800", "title": "Parto · Laura" }
-  ],
-  "whatsapp": "5511999999999",
-  "instagram": "sarahfotografia",
-  "email": "contato@sarahfoto.com",
+  "footerText": "Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.",
   "ctaTitle": "Vamos Conversar?",
   "ctaSubtitle": "Entre em contato e vamos criar algo lindo juntas",
-  "footerText": "Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.",
+  "instagramUsername": "",
+  "serviceImages": {
+    "partos": "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800",
+    "gestante": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800",
+    "familia": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800",
+    "especiais": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800"
+  },
   "serviceDetails": {
     "partos": {
       "title": "Fotografia de Parto",
@@ -46,6 +35,15 @@
       "features": "Batizados|Registro completo da cerimônia e dos detalhes especiais||Ensaios de Natal|Sessões temáticas para criar memórias mágicas||Aniversários|Do primeiro aninho às grandes celebrações||Acompanhamento|Sessões periódicas para documentar o crescimento"
     }
   },
+  "aboutImage": "https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800",
+  "colors": {
+    "primary": "#E8D5C4",
+    "secondary": "#C9ADA1",
+    "accent": "#A0826D"
+  },
+  "whatsapp": "5511999999999",
+  "heroSubtitle": "Partos • Gestantes • Família",
+  "siteName": "Kelly Almeida Fotografia",
   "heroImages": [
     "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1400",
     "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1400",
@@ -53,11 +51,35 @@
     "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1400",
     "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1400"
   ],
-  "serviceImages": {
-    "partos": "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800",
-    "gestante": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800",
-    "familia": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800",
-    "especiais": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800"
-  },
-  "colors": { "primary": "#E8D5C4", "secondary": "#C9ADA1", "accent": "#A0826D" }
+  "gallery": [
+    {
+      "url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800",
+      "title": "Parto · João"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800",
+      "title": "Parto · Maria"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800",
+      "title": "Gestante · Ana"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800",
+      "title": "Família · Silva"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800",
+      "title": "Parto · Pedro"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800",
+      "title": "Parto · Laura"
+    }
+  ],
+  "instagram": "sarahfotografia",
+  "galleryMode": "manual",
+  "aboutText": "Olá! Sou xxxxxxx, fotógrafa especializada em capturar os momentos mais preciosos da sua família.\n\nCada sessão é única e personalizada, sempre pensada com carinho.",
+  "email": "contato@sarahfoto.com",
+  "heroTitle": "Kelly Almeida Fotografia"
 }
