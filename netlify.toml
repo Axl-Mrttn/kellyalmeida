@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/"
+  to = "/admin/"
+  status = 302
+  force = false
+  conditions = { Identity = ["invite", "recovery", "confirmation"] }
