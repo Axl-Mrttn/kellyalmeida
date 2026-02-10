@@ -1,6 +1,9 @@
 [[redirects]]
-  from = "/"
+  from = "/admin"
   to = "/admin/"
-  status = 302
-  force = false
-  conditions = { Identity = ["invite", "recovery", "confirmation"] }
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
