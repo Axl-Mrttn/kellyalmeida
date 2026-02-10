@@ -3,11 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Admin | Kelly Almeida</title>
+    <title>Admin</title>
   </head>
   <body>
-    <!-- Netlify CMS -->
+    <!-- Netlify Identity (login) -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+
+    <!-- Decap CMS (Netlify CMS) -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <script>
+      // Se vier de convite/recovery/confirm, redireciona pro admin mantendo hash
+      if (
+        window.location.hash &&
+        (window.location.hash.includes("invite_token=") ||
+          window.location.hash.includes("recovery_token=") ||
+          window.location.hash.includes("confirmation_token="))
+      ) {
+        window.location.href = "/admin/" + window.location.hash;
+      }
+
+      // Após login, garante que fica no /admin/
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
