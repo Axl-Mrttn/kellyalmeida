@@ -11,7 +11,7 @@ collections:
   - name: "site"
     label: "Site"
     files:
-      - file: "data/site.json"
+      - file: "admin/data/site.json"
         label: "Dados do Site"
         name: "site"
         fields:
