@@ -1,3061 +1,2100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelly Almeida Fotografia • Partos, Gestantes & Família</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style id="customStyles">
-        :root {
-            --cor-principal: #E8D5C4;
-            --cor-secundaria: #C9ADA1;
-            --cor-destaque: #A0826D;
-            --cor-texto: #4A4A4A;
-            --cor-clara: #FAF8F5;
-            --cor-escura: #3D2B1F;
-            --fonte-titulo: 'Cormorant Garamond', serif;
-            --fonte-corpo: 'Montserrat', sans-serif;
-            --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
-            --shadow-md: 0 8px 30px rgba(0,0,0,0.1);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--fonte-corpo);
-            background: var(--cor-clara);
-            color: var(--cor-texto);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* ==================== HEADER ==================== */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(250, 248, 245, 0.97);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 0;
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .header.scrolled {
-            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
-        }
-
-        .nav {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 50px;
-        }
-
-        .logo {
-            font-family: var(--fonte-titulo);
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: var(--cor-destaque);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .logo span {
-            font-weight: 300;
-            font-style: italic;
-            text-transform: lowercase;
-            letter-spacing: 1px;
-        }
-
-        .menu {
-            display: flex;
-            gap: 35px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: var(--cor-texto);
-            font-size: 0.8rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-            position: relative;
-            padding-bottom: 4px;
-        }
-
-        .menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--cor-destaque);
-            transition: width 0.3s ease;
-        }
-
-        .menu a:hover { color: var(--cor-destaque); }
-        .menu a:hover::after { width: 100%; }
-
-        .admin-link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: none;
-            border: 1px solid var(--cor-secundaria);
-            color: var(--cor-destaque);
-            padding: 8px 18px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
-
-        .admin-link:hover {
-            background: var(--cor-destaque);
-            color: white;
-            border-color: var(--cor-destaque);
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--cor-destaque);
-            cursor: pointer;
-        }
-
-        /* ==================== PAGE SYSTEM ==================== */
-        .page { display: none; }
-        .page.active { display: block; }
-
-        /* ==================== HERO ==================== */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-slides {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-
-        .hero-slide {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            opacity: 0;
-            transition: opacity 1.5s ease, transform 8s ease;
-            transform: scale(1.05);
-        }
-
-        .hero-slide.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .hero-slide img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(61, 43, 31, 0.3) 0%,
-                rgba(61, 43, 31, 0.5) 50%,
-                rgba(61, 43, 31, 0.7) 100%
-            );
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            animation: fadeInUp 1.5s ease-out;
-            padding: 0 20px;
-        }
-
-        .hero-content h1 {
-            font-family: var(--fonte-titulo);
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 300;
-            color: white;
-            letter-spacing: 6px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .hero-content .hero-divider {
-            width: 60px;
-            height: 1px;
-            background: rgba(255,255,255,0.6);
-            margin: 20px auto;
-        }
-
-        .hero-content p {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.85);
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-scroll i { font-size: 1.2rem; }
-
-        @keyframes float {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        .hero-indicators {
-            position: absolute;
-            bottom: 40px;
-            right: 50px;
-            z-index: 3;
-            display: flex;
-            gap: 8px;
-        }
-
-        .hero-indicator {
-            width: 30px;
-            height: 2px;
-            background: rgba(255,255,255,0.3);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .hero-indicator.active {
-            background: white;
-            width: 50px;
-        }
-
-        /* ==================== SECTIONS COMMON ==================== */
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-header h2 {
-            font-family: var(--fonte-titulo);
-            font-size: clamp(2.2rem, 4vw, 3.2rem);
-            font-weight: 300;
-            color: var(--cor-destaque);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .section-header .section-line {
-            width: 50px;
-            height: 1px;
-            background: var(--cor-secundaria);
-            margin: 0 auto 15px;
-        }
-
-        .section-header p {
-            font-size: 0.95rem;
-            color: #999;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ==================== SOBRE ==================== */
-        .sobre {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 140px 50px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            align-items: center;
-        }
-
-        .sobre-imagem { position: relative; }
-
-        .sobre-imagem::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: 15px;
-            bottom: 15px;
-            border: 1px solid var(--cor-secundaria);
-            z-index: -1;
-            transition: var(--transition);
-        }
-
-        .sobre-imagem:hover::before {
-            top: -20px;
-            left: -20px;
-        }
-
-        .sobre-imagem img {
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .sobre-texto .sobre-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--cor-secundaria);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .sobre-texto .sobre-label::before {
-            content: '';
-            width: 30px;
-            height: 1px;
-            background: var(--cor-secundaria);
-        }
-
-        .sobre-texto h2 {
-            font-family: var(--fonte-titulo);
-            font-size: 2.8rem;
-            font-weight: 300;
-            color: var(--cor-destaque);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            line-height: 1.2;
-        }
-
-        .sobre-texto p {
-            font-size: 1rem;
-            line-height: 1.9;
-            margin-bottom: 20px;
-            font-weight: 300;
-            color: #666;
-        }
-
-        /* ==================== GALERIA ==================== */
-        .galeria {
-            padding: 120px 50px;
-            background: white;
-        }
-
-        .instagram-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .galeria-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .galeria-item {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 1;
-            cursor: pointer;
-            background: #f0f0f0;
-        }
-
-        .galeria-item img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .galeria-item:hover img { transform: scale(1.08); }
-
-        .galeria-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(61, 43, 31, 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .galeria-item:hover .galeria-overlay {
-            background: rgba(61, 43, 31, 0.4);
-        }
-
-        .galeria-overlay h3 {
-            color: white;
-            font-family: var(--fonte-titulo);
-            font-size: 1.3rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: var(--transition);
-        }
-
-        .galeria-item:hover .galeria-overlay h3 {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 30px; height: 30px;
-            border: 2px solid #eee;
-            border-top: 2px solid var(--cor-destaque);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ==================== SERVICOS ==================== */
-        .servicos {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 140px 50px;
-        }
-
-        .servicos-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        .servico-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            background: white;
-            border-radius: 2px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-
-        .servico-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .servico-card-image {
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .servico-card-image img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .servico-card:hover .servico-card-image img {
-            transform: scale(1.05);
-        }
-
-        .servico-card-image .servico-icon-float {
-            position: absolute;
-            bottom: -25px;
-            right: 30px;
-            width: 50px; height: 50px;
-            background: var(--cor-destaque);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            z-index: 2;
-        }
-
-        .servico-card-body {
-            padding: 35px 30px 30px;
-        }
-
-        .servico-card-body h3 {
-            font-family: var(--fonte-titulo);
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: var(--cor-destaque);
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        .servico-card-body p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #888;
-            margin-bottom: 20px;
-        }
-
-        .servico-card-link {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--cor-destaque);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .servico-card-link:hover { gap: 14px; }
-
-        /* ==================== SERVICE DETAIL PAGE ==================== */
-        .service-detail {
-            padding-top: 80px;
-        }
-
-        .service-detail-hero {
-            height: 60vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .service-detail-hero img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-
-        .service-detail-hero .hero-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(61,43,31,0.3), rgba(61,43,31,0.6));
-            z-index: 2;
-        }
-
-        .service-detail-hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            color: white;
-        }
-
-        .service-detail-hero-content .service-icon-lg {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .service-detail-hero-content h1 {
-            font-family: var(--fonte-titulo);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        .service-detail-hero-content p {
-            margin-top: 15px;
-            font-size: 1rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            opacity: 0.85;
-        }
-
-        .service-detail-content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 100px 50px;
-        }
-
-        .service-detail-content h2 {
-            font-family: var(--fonte-titulo);
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: var(--cor-destaque);
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-
-        .service-detail-content p {
-            font-size: 1.05rem;
-            line-height: 2;
-            font-weight: 300;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .service-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 50px 0;
-        }
-
-        .service-feature {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .service-feature i {
-            color: var(--cor-destaque);
-            font-size: 1rem;
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        .service-feature h4 {
-            font-family: var(--fonte-titulo);
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--cor-escura);
-            margin-bottom: 5px;
-        }
-
-        .service-feature p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-
-        .service-cta {
-            text-align: center;
-            padding: 80px 50px;
-            background: var(--cor-clara);
-        }
-
-        .service-cta h3 {
-            font-family: var(--fonte-titulo);
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--cor-destaque);
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .service-cta p {
-            color: #888;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 40px;
-            background: var(--cor-destaque);
-            color: white;
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-primary:hover {
-            background: var(--cor-escura);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--cor-destaque);
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            transition: var(--transition);
-        }
-
-        .back-link:hover { gap: 12px; }
-
-        /* ==================== CONTATO PAGE ==================== */
-        .contato-page {
-            padding-top: 80px;
-        }
-
-        .contato-hero {
-            height: 40vh;
-            min-height: 300px;
-            background: linear-gradient(135deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .contato-hero h1 {
-            font-family: var(--fonte-titulo);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
-            color: white;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        .contato-hero p {
-            color: rgba(255,255,255,0.85);
-            margin-top: 15px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .contato-body {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 100px 50px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        .contato-info h3 {
-            font-family: var(--fonte-titulo);
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--cor-destaque);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .contato-info-item {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            margin-bottom: 35px;
-        }
-
-        .contato-info-item .info-icon {
-            width: 45px; height: 45px;
-            background: var(--cor-clara);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--cor-destaque);
-            font-size: 1rem;
-        }
-
-        .contato-info-item h4 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #aaa;
-            margin-bottom: 5px;
-            font-weight: 400;
-        }
-
-        .contato-info-item p {
-            font-weight: 300;
-            color: var(--cor-texto);
-        }
-
-        .contato-info-item a {
-            color: var(--cor-destaque);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contato-info-item a:hover { color: var(--cor-escura); }
-
-        .contato-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 40px;
-        }
-
-        .contato-social a {
-            width: 45px; height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #ddd;
-            color: var(--cor-destaque);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contato-social a:hover {
-            background: var(--cor-destaque);
-            color: white;
-            border-color: var(--cor-destaque);
-        }
-
-        .contato-form h3 {
-            font-family: var(--fonte-titulo);
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--cor-destaque);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #aaa;
-            font-weight: 400;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #e0e0e0;
-            background: white;
-            font-family: var(--fonte-corpo);
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: var(--cor-texto);
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--cor-destaque);
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        /* ==================== AGENDAMENTO PAGE ==================== */
-        .agendamento-page { padding-top: 80px; }
-
-        .agendamento-hero {
-            height: 40vh;
-            min-height: 300px;
-            background: linear-gradient(135deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .agendamento-hero h1 {
-            font-family: var(--fonte-titulo);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
-            color: white;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        .agendamento-hero p {
-            color: rgba(255,255,255,0.85);
-            margin-top: 15px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .agendamento-body {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 100px 50px;
-        }
-
-        .agendamento-steps {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-bottom: 70px;
-        }
-
-        .agendamento-step {
-            text-align: center;
-        }
-
-        .agendamento-step .step-number {
-            width: 50px; height: 50px;
-            border: 1px solid var(--cor-secundaria);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-family: var(--fonte-titulo);
-            font-size: 1.3rem;
-            color: var(--cor-destaque);
-        }
-
-        .agendamento-step p {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #aaa;
-            font-weight: 400;
-        }
-
-        .agendamento-form-card {
-            background: white;
-            padding: 60px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .agendamento-form-card h3 {
-            font-family: var(--fonte-titulo);
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--cor-destaque);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .agendamento-form-card > p {
-            color: #aaa;
-            font-weight: 300;
-            margin-bottom: 40px;
-            font-size: 0.95rem;
-        }
-
-        .date-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* ==================== CONTATO SECTION (homepage) ==================== */
-        .contato-section {
-            padding: 140px 50px;
-            background: linear-gradient(135deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
-            text-align: center;
-            position: relative;
-        }
-
-        .contato-section h2 {
-            font-family: var(--fonte-titulo);
-            font-size: clamp(2.2rem, 4vw, 3.2rem);
-            font-weight: 300;
-            color: white;
-            margin-bottom: 15px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .contato-section .section-line {
-            width: 50px;
-            height: 1px;
-            background: rgba(255,255,255,0.4);
-            margin: 0 auto 15px;
-        }
-
-        .contato-section p {
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 45px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .contato-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .contato-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 35px;
-            background: white;
-            color: var(--cor-destaque);
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .contato-btn:hover {
-            background: var(--cor-escura);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* ==================== FOOTER ==================== */
-        .footer {
-            background: var(--cor-escura);
-            color: rgba(255,255,255,0.7);
-            padding: 60px 50px 30px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 50px;
-        }
-
-        .footer-brand .logo {
-            color: white;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .footer-brand p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .footer-links h4 {
-            font-family: var(--fonte-titulo);
-            font-size: 1.2rem;
-            color: white;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            font-weight: 400;
-        }
-
-        .footer-links a {
-            display: block;
-            color: rgba(255,255,255,0.5);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 300;
-            margin-bottom: 12px;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover { color: white; }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 30px;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 300;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* ==================== ADMIN PANEL ==================== */
-        .admin-panel {
-            position: fixed;
-            top: 0; right: -550px;
-            width: 550px; height: 100vh;
-            background: white;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
-            z-index: 10000;
-            overflow-y: auto;
-            transition: right 0.4s ease;
-        }
-
-        .admin-panel.open { right: 0; }
-
-        .admin-header {
-            background: var(--cor-escura);
-            color: white;
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .admin-header h2 {
-            font-family: var(--fonte-titulo);
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .close-admin {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .close-admin:hover { transform: rotate(90deg); }
-
-        .admin-content { padding: 30px 25px; }
-
-        .admin-section {
-            margin-bottom: 35px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .admin-section h3 {
-            font-family: var(--fonte-titulo);
-            font-size: 1.3rem;
-            color: var(--cor-destaque);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 1px;
-        }
-
-        .admin-section h3 i {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .color-input {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .color-input input[type="color"] {
-            width: 50px; height: 38px;
-            border: 1px solid #e0e0e0;
-            border-radius: 0;
-            cursor: pointer;
-            padding: 2px;
-        }
-
-        .btn-save {
-            background: var(--cor-destaque);
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-save:hover {
-            background: var(--cor-escura);
-        }
-
-        .instagram-mode {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            color: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .instagram-mode h4 { margin-bottom: 8px; }
-
-        .info-box {
-            background: #f8f6f3;
-            border-left: 3px solid var(--cor-destaque);
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .gallery-manager { display: grid; gap: 15px; }
-
-        .gallery-item-admin {
-            padding: 15px;
-            background: #faf8f5;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .gallery-item-thumb {
-            width: 70px; height: 70px;
-            flex-shrink: 0;
-            background: #e8e4e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .gallery-item-thumb img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-item-thumb .thumb-placeholder {
-            color: #bbb;
-            font-size: 1.2rem;
-        }
-
-        .gallery-item-thumb:hover::after {
-            content: '\f030';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(160,130,109,0.7);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .gallery-item-fields {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .gallery-item-fields input { font-size: 0.85rem; padding: 10px 12px; }
-
-        .gallery-item-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .btn-upload {
-            background: var(--cor-destaque);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-
-        .btn-upload:hover { background: var(--cor-escura); }
-
-        .btn-remove {
-            background: none;
-            color: #cc4444;
-            border: 1px solid #cc4444;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .btn-remove:hover {
-            background: #cc4444;
-            color: white;
-        }
-
-        .upload-dropzone {
-            border: 2px dashed var(--cor-secundaria);
-            padding: 30px;
-            text-align: center;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .upload-dropzone:hover,
-        .upload-dropzone.dragover {
-            border-color: var(--cor-destaque);
-            background: #faf8f5;
-        }
-
-        .upload-dropzone i {
-            font-size: 2rem;
-            color: var(--cor-secundaria);
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .upload-dropzone p {
-            font-size: 0.85rem;
-            color: #999;
-            font-weight: 300;
-        }
-
-        .upload-dropzone .upload-hint {
-            font-size: 0.75rem;
-            color: #bbb;
-            margin-top: 5px;
-        }
-
-        .storage-warning {
-            background: #fff8e1;
-            border-left: 3px solid #f9a825;
-            padding: 10px 12px;
-            font-size: 0.78rem;
-            color: #7c6b00;
-            margin-bottom: 15px;
-        }
-
-        .btn-add {
-            background: var(--cor-clara);
-            color: var(--cor-destaque);
-            border: 1px dashed var(--cor-secundaria);
-            padding: 12px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-
-        .btn-add:hover {
-            background: var(--cor-destaque);
-            color: white;
-            border-style: solid;
-        }
-
-        /* LOGIN */
-        .login-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 20000;
-        }
-
-        .login-overlay.active { display: flex; }
-
-        .login-box {
-            background: white;
-            padding: 50px;
-            width: 420px;
-            max-width: 90%;
-        }
-
-        .login-box h2 {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-destaque);
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 300;
-            font-size: 2rem;
-            letter-spacing: 2px;
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 1024px) {
-            .servicos-grid { grid-template-columns: repeat(2, 1fr); }
-            .service-features { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; gap: 30px; }
-        }
-
-        @media (max-width: 768px) {
-            .admin-panel { width: 100%; right: -100%; }
-            .sobre { grid-template-columns: 1fr; gap: 50px; padding: 80px 30px; }
-            .nav { padding: 15px 25px; }
-            .menu { display: none; }
-            .menu.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%; left: 0;
-                width: 100%;
-                background: rgba(250,248,245,0.98);
-                padding: 30px;
-                gap: 20px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            }
-            .mobile-toggle { display: block; }
-            .servicos-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-            .galeria-grid { grid-template-columns: 1fr 1fr; }
-            .galeria { padding: 80px 20px; }
-            .contato-body { grid-template-columns: 1fr; gap: 50px; }
-            .agendamento-steps { flex-direction: column; gap: 30px; }
-            .agendamento-form-card { padding: 30px; }
-            .form-row, .date-grid { grid-template-columns: 1fr; }
-            .hero-indicators { display: none; }
-            .hero-scroll { display: none; }
-        }
-
-        @media (max-width: 480px) {
-            .galeria-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelly Almeida Fotografia • Partos, Gestantes & Família</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style id="customStyles">
+    :root {
+      --cor-principal: #E8D5C4;
+      --cor-secundaria: #C9ADA1;
+      --cor-destaque: #A0826D;
+      --cor-texto: #4A4A4A;
+      --cor-clara: #FAF8F5;
+      --cor-escura: #3D2B1F;
+      --fonte-titulo: 'Cormorant Garamond', serif;
+      --fonte-corpo: 'Montserrat', sans-serif;
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.1);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--fonte-corpo);
+      background: var(--cor-clara);
+      color: var(--cor-texto);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ==================== HEADER ==================== */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(250, 248, 245, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+
+    .nav {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 50px;
+      position: relative;
+    }
+
+    .logo {
+      font-family: var(--fonte-titulo);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cor-destaque);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .logo span {
+      font-weight: 300;
+      font-style: italic;
+      text-transform: lowercase;
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--cor-texto);
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .menu a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--cor-destaque);
+      transition: width 0.3s ease;
+    }
+
+    .menu a:hover { color: var(--cor-destaque); }
+    .menu a:hover::after { width: 100%; }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--cor-destaque);
+      cursor: pointer;
+    }
+
+    /* ==================== PAGE SYSTEM ==================== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ==================== HERO ==================== */
+    .hero {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-slides {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease, transform 8s ease;
+      transform: scale(1.05);
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(61, 43, 31, 0.3) 0%,
+        rgba(61, 43, 31, 0.5) 50%,
+        rgba(61, 43, 31, 0.7) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      animation: fadeInUp 1.5s ease-out;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      color: white;
+      letter-spacing: 6px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .hero-content .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: rgba(255,255,255,0.6);
+      margin: 20px auto;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-scroll i { font-size: 1.2rem; }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    .hero-indicators {
+      position: absolute;
+      bottom: 40px;
+      right: 50px;
+      z-index: 3;
+      display: flex;
+      gap: 8px;
+    }
+
+    .hero-indicator {
+      width: 30px;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .hero-indicator.active {
+      background: white;
+      width: 50px;
+    }
+
+    /* ==================== SECTIONS COMMON ==================== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-header h2 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: var(--cor-destaque);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .section-header .section-line {
+      width: 50px;
+      height: 1px;
+      background: var(--cor-secundaria);
+      margin: 0 auto 15px;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== SOBRE ==================== */
+    .sobre {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 140px 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .sobre-imagem { position: relative; }
+
+    .sobre-imagem::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: 15px;
+      bottom: 15px;
+      border: 1px solid var(--cor-secundaria);
+      z-index: -1;
+      transition: var(--transition);
+    }
+
+    .sobre-imagem:hover::before {
+      top: -20px;
+      left: -20px;
+    }
+
+    .sobre-imagem img {
+      width: 100%;
+      height: 550px;
+      object-fit: cover;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .sobre-texto .sobre-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--cor-secundaria);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sobre-texto .sobre-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--cor-secundaria);
+    }
+
+    .sobre-texto h2 {
+      font-family: var(--fonte-titulo);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--cor-destaque);
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      line-height: 1.2;
+    }
+
+    .sobre-texto p {
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: #666;
+    }
+
+    /* ==================== GALERIA ==================== */
+    .galeria {
+      padding: 120px 50px;
+      background: white;
+    }
+
+    .instagram-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .galeria-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .galeria-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+      background: #f0f0f0;
+    }
+
+    .galeria-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .galeria-item:hover img { transform: scale(1.08); }
+
+    .galeria-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(61, 43, 31, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .galeria-item:hover .galeria-overlay {
+      background: rgba(61, 43, 31, 0.4);
+    }
+
+    .galeria-overlay h3 {
+      color: white;
+      font-family: var(--fonte-titulo);
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: var(--transition);
+    }
+
+    .galeria-item:hover .galeria-overlay h3 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 30px; height: 30px;
+      border: 2px solid #eee;
+      border-top: 2px solid var(--cor-destaque);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ==================== SERVICOS ==================== */
+    .servicos {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 140px 50px;
+    }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .servico-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: white;
+      border-radius: 2px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .servico-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .servico-card-image {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .servico-card-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .servico-card:hover .servico-card-image img {
+      transform: scale(1.05);
+    }
+
+    .servico-card-image .servico-icon-float {
+      position: absolute;
+      bottom: -25px;
+      right: 30px;
+      width: 50px; height: 50px;
+      background: var(--cor-destaque);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      z-index: 2;
+    }
+
+    .servico-card-body {
+      padding: 35px 30px 30px;
+    }
+
+    .servico-card-body h3 {
+      font-family: var(--fonte-titulo);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cor-destaque);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .servico-card-body p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .servico-card-link {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--cor-destaque);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .servico-card-link:hover { gap: 14px; }
+
+    /* ==================== SERVICE DETAIL PAGE ==================== */
+    .service-detail { padding-top: 80px; }
+
+    .service-detail-hero {
+      height: 60vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-detail-hero img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .service-detail-hero .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(61,43,31,0.3), rgba(61,43,31,0.6));
+      z-index: 2;
+    }
+
+    .service-detail-hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: white;
+    }
+
+    .service-detail-hero-content .service-icon-lg {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    .service-detail-hero-content h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .service-detail-hero-content p {
+      margin-top: 15px;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      opacity: 0.85;
+    }
+
+    .service-detail-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 50px;
+    }
+
+    .service-detail-content h2 {
+      font-family: var(--fonte-titulo);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--cor-destaque);
+      margin-bottom: 25px;
+      letter-spacing: 2px;
+    }
+
+    .service-detail-content p {
+      font-size: 1.05rem;
+      line-height: 2;
+      font-weight: 300;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .service-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 50px 0;
+    }
+
+    .service-feature {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .service-feature i {
+      color: var(--cor-destaque);
+      font-size: 1rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .service-feature h4 {
+      font-family: var(--fonte-titulo);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--cor-escura);
+      margin-bottom: 5px;
+    }
+
+    .service-feature p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    .service-cta {
+      text-align: center;
+      padding: 80px 50px;
+      background: var(--cor-clara);
+    }
+
+    .service-cta h3 {
+      font-family: var(--fonte-titulo);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cor-destaque);
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .service-cta p {
+      color: #888;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--cor-destaque);
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      background: var(--cor-escura);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cor-destaque);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+      transition: var(--transition);
+    }
+
+    .back-link:hover { gap: 12px; }
+
+    /* ==================== CONTATO PAGE ==================== */
+    .contato-page { padding-top: 80px; }
+
+    .contato-hero {
+      height: 40vh;
+      min-height: 300px;
+      background: linear-gradient(135deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .contato-hero h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: white;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .contato-hero p {
+      color: rgba(255,255,255,0.85);
+      margin-top: 15px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .contato-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .contato-info h3 {
+      font-family: var(--fonte-titulo);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cor-destaque);
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .contato-info-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 35px;
+    }
+
+    .contato-info-item .info-icon {
+      width: 45px; height: 45px;
+      background: var(--cor-clara);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--cor-destaque);
+      font-size: 1rem;
+    }
+
+    .contato-info-item h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      margin-bottom: 5px;
+      font-weight: 400;
+    }
+
+    .contato-info-item p {
+      font-weight: 300;
+      color: var(--cor-texto);
+    }
+
+    .contato-info-item a {
+      color: var(--cor-destaque);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contato-info-item a:hover { color: var(--cor-escura); }
+
+    .contato-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .contato-social a {
+      width: 45px; height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      color: var(--cor-destaque);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contato-social a:hover {
+      background: var(--cor-destaque);
+      color: white;
+      border-color: var(--cor-destaque);
+    }
+
+    .contato-form h3 {
+      font-family: var(--fonte-titulo);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cor-destaque);
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e0e0e0;
+      background: white;
+      font-family: var(--fonte-corpo);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--cor-texto);
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--cor-destaque);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* ==================== AGENDAMENTO PAGE ==================== */
+    .agendamento-page { padding-top: 80px; }
+
+    .agendamento-hero {
+      height: 40vh;
+      min-height: 300px;
+      background: linear-gradient(135deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .agendamento-hero h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: white;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .agendamento-hero p {
+      color: rgba(255,255,255,0.85);
+      margin-top: 15px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .agendamento-body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 50px;
+    }
+
+    .agendamento-steps {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 70px;
+    }
+
+    .agendamento-step { text-align: center; }
+
+    .agendamento-step .step-number {
+      width: 50px; height: 50px;
+      border: 1px solid var(--cor-secundaria);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-family: var(--fonte-titulo);
+      font-size: 1.3rem;
+      color: var(--cor-destaque);
+    }
+
+    .agendamento-step p {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    .agendamento-form-card {
+      background: white;
+      padding: 60px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .agendamento-form-card h3 {
+      font-family: var(--fonte-titulo);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cor-destaque);
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .agendamento-form-card > p {
+      color: #aaa;
+      font-weight: 300;
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+    }
+
+    .date-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* ==================== CONTATO SECTION (homepage) ==================== */
+    .contato-section {
+      padding: 140px 50px;
+      background: linear-gradient(135deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
+      text-align: center;
+      position: relative;
+    }
+
+    .contato-section h2 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: white;
+      margin-bottom: 15px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .contato-section .section-line {
+      width: 50px;
+      height: 1px;
+      background: rgba(255,255,255,0.4);
+      margin: 0 auto 15px;
+    }
+
+    .contato-section p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 45px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .contato-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .contato-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 35px;
+      background: white;
+      color: var(--cor-destaque);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .contato-btn:hover {
+      background: var(--cor-escura);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      background: var(--cor-escura);
+      color: rgba(255,255,255,0.7);
+      padding: 60px 50px 30px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand .logo {
+      color: white;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-links h4 {
+      font-family: var(--fonte-titulo);
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
+
+    .footer-links a {
+      display: block;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 300;
+      margin-bottom: 12px;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 30px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 300;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 1024px) {
+      .servicos-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-features { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    @media (max-width: 768px) {
+      .sobre { grid-template-columns: 1fr; gap: 50px; padding: 80px 30px; }
+      .nav { padding: 15px 25px; }
+      .menu { display: none; }
+      .menu.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0;
+        width: 100%;
+        background: rgba(250,248,245,0.98);
+        padding: 30px;
+        gap: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+      .mobile-toggle { display: block; }
+      .servicos-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+      .galeria-grid { grid-template-columns: 1fr 1fr; }
+      .galeria { padding: 80px 20px; }
+      .contato-body { grid-template-columns: 1fr; gap: 50px; }
+      .agendamento-steps { flex-direction: column; gap: 30px; }
+      .agendamento-form-card { padding: 30px; }
+      .form-row, .date-grid { grid-template-columns: 1fr; }
+      .hero-indicators { display: none; }
+      .hero-scroll { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .galeria-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="mainHeader">
+    <nav class="nav">
+      <div class="logo" id="siteName" onclick="navigateTo('home')">Kelly Almeida <span>Fotografia</span></div>
+      <button class="mobile-toggle" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="menu" id="mainMenu">
+        <li><a href="#" onclick="navigateTo('home'); return false;">Início</a></li>
+        <li><a href="#" onclick="scrollToSection('sobre'); return false;">Sobre</a></li>
+        <li><a href="#" onclick="scrollToSection('galeria'); return false;">Galeria</a></li>
+        <li><a href="#" onclick="navigateTo('contato'); return false;">Contato</a></li>
+        <li><a href="#" onclick="navigateTo('agendamento'); return false;">Agendamento</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- ==================== HEADER ==================== -->
-    <header class="header" id="mainHeader">
-        <nav class="nav">
-            <div class="logo" id="siteName" onclick="navigateTo('home')">Kelly Almeida <span>Fotografia</span></div>
-            <button class="mobile-toggle" onclick="toggleMobileMenu()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <ul class="menu" id="mainMenu">
-                <li><a href="#" onclick="navigateTo('home'); return false;">Início</a></li>
-                <li><a href="#" onclick="scrollToSection('sobre'); return false;">Sobre</a></li>
-                <li><a href="#" onclick="scrollToSection('galeria'); return false;">Galeria</a></li>
-                <li><a href="#" onclick="navigateTo('contato'); return false;">Contato</a></li>
-                <li><a href="#" onclick="navigateTo('agendamento'); return false;">Agendamento</a></li>
-                <li><a href="#" class="admin-link" onclick="openLogin(); return false;"><i class="fa-solid fa-lock"></i> Admin</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- ==================== HOME PAGE ==================== -->
+  <div class="page active" id="page-home">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-slides" id="heroSlides"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 id="heroTitle">Kelly Almeida</h1>
+        <div class="hero-divider"></div>
+        <p id="heroSubtitle">Partos &bull; Gestantes &bull; Família</p>
+      </div>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="hero-indicators" id="heroIndicators"></div>
+    </section>
 
-    <!-- ==================== HOME PAGE ==================== -->
-    <div class="page active" id="page-home">
+    <!-- SOBRE -->
+    <section class="sobre" id="sobre">
+      <div class="sobre-imagem fade-in">
+        <img id="aboutImage" src="https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800" alt="Fotógrafa">
+      </div>
+      <div class="sobre-texto fade-in">
+        <div class="sobre-label">Conheça minha história</div>
+        <h2>Sobre Mim</h2>
+        <div id="aboutText">
+          <p>Olá! Sou Kelly, fotógrafa especializada em capturar os momentos mais preciosos da sua família.</p>
+          <p>Cada sessão é única e personalizada, sempre pensada com carinho.</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- HERO -->
-        <section class="hero">
-            <div class="hero-slides" id="heroSlides"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 id="heroTitle">Kelly Almeida Fotografia</h1>
-                <div class="hero-divider"></div>
-                <p id="heroSubtitle">Partos &bull; Gestantes &bull; Família</p>
-            </div>
-            <div class="hero-scroll">
-                <span>Scroll</span>
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
-            <div class="hero-indicators" id="heroIndicators"></div>
-        </section>
+    <!-- GALERIA -->
+    <section class="galeria" id="galeria">
+      <div class="section-header fade-in">
+        <h2>Meu Trabalho</h2>
+        <div class="section-line"></div>
+        <p>
+          <span class="instagram-badge" id="instaBadge" style="display: none;">
+            <i class="fa-brands fa-instagram"></i> Fotos do Instagram
+          </span>
+        </p>
+      </div>
+      <div class="galeria-grid" id="galleryContainer">
+        <div style="text-align: center; padding: 40px; grid-column: 1/-1;">
+          <div class="loading-spinner"></div>
+          <p style="margin-top: 20px; font-weight: 300;">Carregando galeria...</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- SOBRE -->
-        <section class="sobre" id="sobre">
-            <div class="sobre-imagem fade-in">
-                <img id="aboutImage" src="https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800" alt="Fotógrafa">
-            </div>
-            <div class="sobre-texto fade-in">
-                <div class="sobre-label">Conheça minha história</div>
-                <h2>Sobre Mim</h2>
-                <div id="aboutText">
-                    <p>Olá! Sou Kelly, fotógrafa especializada em capturar os momentos mais preciosos da sua família.</p>
-                    <p>Cada sessão é única e personalizada, sempre pensada com carinho.</p>
-                </div>
-            </div>
-        </section>
+    <!-- SERVICOS -->
+    <section class="servicos" id="servicos">
+      <div class="section-header fade-in">
+        <h2>Serviços</h2>
+        <div class="section-line"></div>
+        <p>Cada momento merece ser eternizado com arte e emoção</p>
+      </div>
+      <div class="servicos-grid" id="servicosGrid"></div>
+    </section>
 
-        <!-- GALERIA -->
-        <section class="galeria" id="galeria">
-            <div class="section-header fade-in">
-                <h2>Meu Trabalho</h2>
-                <div class="section-line"></div>
-                <p>
-                    <span class="instagram-badge" id="instaBadge" style="display: none;">
-                        <i class="fa-brands fa-instagram"></i> Fotos do Instagram
-                    </span>
-                </p>
-            </div>
-            <div class="galeria-grid" id="galleryContainer">
-                <div style="text-align: center; padding: 40px; grid-column: 1/-1;">
-                    <div class="loading-spinner"></div>
-                    <p style="margin-top: 20px; font-weight: 300;">Carregando galeria...</p>
-                </div>
-            </div>
-        </section>
+    <!-- CONTATO SECTION -->
+    <section class="contato-section" id="contatoSection">
+      <h2>Vamos Conversar?</h2>
+      <div class="section-line" style="background: rgba(255,255,255,0.4);"></div>
+      <p>Entre em contato e vamos criar algo lindo juntas</p>
+      <div class="contato-links" id="contactLinks"></div>
+    </section>
+  </div>
 
-        <!-- SERVICOS -->
-        <section class="servicos" id="servicos">
-            <div class="section-header fade-in">
-                <h2>Serviços</h2>
-                <div class="section-line"></div>
-                <p>Cada momento merece ser eternizado com arte e emoção</p>
-            </div>
-            <div class="servicos-grid" id="servicosGrid"></div>
-        </section>
+  <!-- ==================== SERVICE DETAIL PAGES ==================== -->
+  <div class="page" id="page-service-partos">
+    <div class="service-detail">
+      <div class="service-detail-hero">
+        <img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1200" alt="Fotografia de Parto">
+        <div class="hero-overlay"></div>
+        <div class="service-detail-hero-content">
+          <div class="service-icon-lg"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h1>Partos</h1>
+          <p>O primeiro encontro mais emocionante da vida</p>
+        </div>
+      </div>
+      <div class="service-detail-content">
+        <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+        <h2>Fotografia de Parto</h2>
+        <p>A chegada de um bebê é um dos momentos mais transformadores e emocionantes na vida de uma família. Como fotógrafa de partos, meu papel é estar presente de forma discreta e respeitosa, capturando cada emoção, cada olhar, cada toque com sensibilidade artística.</p>
+        <p>Trabalho tanto em partos hospitalares quanto domiciliares, sempre priorizando o conforto e a privacidade da família. Fico de sobreaviso a partir da 37ª semana, garantindo que estarei lá no momento certo.</p>
 
-        <!-- CONTATO SECTION -->
-        <section class="contato-section" id="contatoSection">
-            <h2>Vamos Conversar?</h2>
-            <div class="section-line" style="background: rgba(255,255,255,0.4);"></div>
-            <p>Entre em contato e vamos criar algo lindo juntas</p>
-            <div class="contato-links" id="contactLinks"></div>
-        </section>
+        <div class="service-features">
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Sobreaviso 24h</h4>
+              <p>Disponível a qualquer hora a partir da 37ª semana</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Cobertura Completa</h4>
+              <p>Do trabalho de parto aos primeiros momentos do bebê</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Galeria Online</h4>
+              <p>Fotos tratadas entregues em galeria privada</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Hospital ou Domiciliar</h4>
+              <p>Atendimento em qualquer local de nascimento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-cta">
+        <h3>Quer registrar esse momento?</h3>
+        <p>Agende uma conversa para conhecer melhor o meu trabalho</p>
+        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
+          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        </a>
+      </div>
     </div>
+  </div>
 
-    <!-- ==================== SERVICE DETAIL PAGES ==================== -->
-    <div class="page" id="page-service-partos">
-        <div class="service-detail">
-            <div class="service-detail-hero">
-                <img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1200" alt="Fotografia de Parto">
-                <div class="hero-overlay"></div>
-                <div class="service-detail-hero-content">
-                    <div class="service-icon-lg"><i class="fa-solid fa-heart-pulse"></i></div>
-                    <h1>Partos</h1>
-                    <p>O primeiro encontro mais emocionante da vida</p>
-                </div>
-            </div>
-            <div class="service-detail-content">
-                <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
-                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                </a>
-                <h2>Fotografia de Parto</h2>
-                <p>A chegada de um bebê é um dos momentos mais transformadores e emocionantes na vida de uma família. Como fotógrafa de partos, meu papel é estar presente de forma discreta e respeitosa, capturando cada emoção, cada olhar, cada toque com sensibilidade artística.</p>
-                <p>Trabalho tanto em partos hospitalares quanto domiciliares, sempre priorizando o conforto e a privacidade da família. Fico de sobreaviso a partir da 37ª semana, garantindo que estarei lá no momento certo.</p>
-
-                <div class="service-features">
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Sobreaviso 24h</h4>
-                            <p>Disponível a qualquer hora a partir da 37ª semana</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Cobertura Completa</h4>
-                            <p>Do trabalho de parto aos primeiros momentos do bebê</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Galeria Online</h4>
-                            <p>Fotos tratadas entregues em galeria privada</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Hospital ou Domiciliar</h4>
-                            <p>Atendimento em qualquer local de nascimento</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="service-cta">
-                <h3>Quer registrar esse momento?</h3>
-                <p>Agende uma conversa para conhecer melhor o meu trabalho</p>
-                <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-                    <i class="fa-regular fa-calendar"></i> Agendar Sessão
-                </a>
-            </div>
+  <div class="page" id="page-service-gestante">
+    <div class="service-detail">
+      <div class="service-detail-hero">
+        <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200" alt="Fotografia Gestante">
+        <div class="hero-overlay"></div>
+        <div class="service-detail-hero-content">
+          <div class="service-icon-lg"><i class="fa-solid fa-seedling"></i></div>
+          <h1>Gestante</h1>
+          <p>Eternize a espera mais linda da sua vida</p>
         </div>
+      </div>
+      <div class="service-detail-content">
+        <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+        <h2>Ensaio Gestante</h2>
+        <p>A gestação é um período mágico e passageiro. Cada curva, cada momento de conexão com o bebê que está por vir merece ser celebrado e documentado com arte e delicadeza.</p>
+        <p>O ensaio gestante é recomendado entre a 28ª e 34ª semana de gestação, quando a barriguinha está linda e a mamãe ainda está confortável. Podemos fazer em estúdio, ao ar livre ou na sua casa — o importante é que você se sinta à vontade.</p>
+
+        <div class="service-features">
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Consultoria de Look</h4>
+              <p>Ajudo a escolher roupas e acessórios ideais</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Locação Flexível</h4>
+              <p>Estúdio, ao ar livre ou na sua casa</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Família Inclusa</h4>
+              <p>Papai e irmãozinhos participam sem custo extra</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Edição Artística</h4>
+              <p>Tratamento profissional em todas as fotos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-cta">
+        <h3>Vamos eternizar esse momento?</h3>
+        <p>O período ideal para o ensaio é entre a 28ª e 34ª semana</p>
+        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
+          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        </a>
+      </div>
     </div>
+  </div>
 
-    <div class="page" id="page-service-gestante">
-        <div class="service-detail">
-            <div class="service-detail-hero">
-                <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200" alt="Fotografia Gestante">
-                <div class="hero-overlay"></div>
-                <div class="service-detail-hero-content">
-                    <div class="service-icon-lg"><i class="fa-solid fa-seedling"></i></div>
-                    <h1>Gestante</h1>
-                    <p>Eternize a espera mais linda da sua vida</p>
-                </div>
-            </div>
-            <div class="service-detail-content">
-                <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
-                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                </a>
-                <h2>Ensaio Gestante</h2>
-                <p>A gestação é um período mágico e passageiro. Cada curva, cada momento de conexão com o bebê que está por vir merece ser celebrado e documentado com arte e delicadeza.</p>
-                <p>O ensaio gestante é recomendado entre a 28ª e 34ª semana de gestação, quando a barriguinha está linda e a mamãe ainda está confortável. Podemos fazer em estúdio, ao ar livre ou na sua casa — o importante é que você se sinta à vontade.</p>
-
-                <div class="service-features">
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Consultoria de Look</h4>
-                            <p>Ajudo a escolher roupas e acessórios ideais</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Locação Flexível</h4>
-                            <p>Estúdio, ao ar livre ou na sua casa</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Família Inclusa</h4>
-                            <p>Papai e irmãozinhos participam sem custo extra</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Edição Artística</h4>
-                            <p>Tratamento profissional em todas as fotos</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="service-cta">
-                <h3>Vamos eternizar esse momento?</h3>
-                <p>O período ideal para o ensaio é entre a 28ª e 34ª semana</p>
-                <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-                    <i class="fa-regular fa-calendar"></i> Agendar Sessão
-                </a>
-            </div>
+  <div class="page" id="page-service-familia">
+    <div class="service-detail">
+      <div class="service-detail-hero">
+        <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1200" alt="Fotografia Família">
+        <div class="hero-overlay"></div>
+        <div class="service-detail-hero-content">
+          <div class="service-icon-lg"><i class="fa-solid fa-people-roof"></i></div>
+          <h1>Família</h1>
+          <p>Momentos que se tornam memórias para sempre</p>
         </div>
+      </div>
+      <div class="service-detail-content">
+        <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+        <h2>Ensaio de Família</h2>
+        <p>As famílias crescem, mudam e se transformam. Registrar esses momentos é criar um tesouro que vocês carregarão para sempre. Meus ensaios de família são descontraídos, cheios de espontaneidade e amor verdadeiro.</p>
+        <p>Não se preocupe com poses perfeitas — o que mais importa é a conexão entre vocês. Eu cuido de capturar os olhares, as risadas e os abraços que tornam a sua família única.</p>
+
+        <div class="service-features">
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Sessão Descontraída</h4>
+              <p>Ambiente leve sem poses forçadas</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Todos Participam</h4>
+              <p>Pets, avós e amigos são bem-vindos</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Lifestyle</h4>
+              <p>Fotos naturais no estilo do dia a dia</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Álbum Disponível</h4>
+              <p>Opção de álbum impresso personalizado</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-cta">
+        <h3>Vamos registrar a sua família?</h3>
+        <p>Cada fase merece ser eternizada com carinho</p>
+        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
+          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        </a>
+      </div>
     </div>
+  </div>
 
-    <div class="page" id="page-service-familia">
-        <div class="service-detail">
-            <div class="service-detail-hero">
-                <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1200" alt="Fotografia Família">
-                <div class="hero-overlay"></div>
-                <div class="service-detail-hero-content">
-                    <div class="service-icon-lg"><i class="fa-solid fa-people-roof"></i></div>
-                    <h1>Família</h1>
-                    <p>Momentos que se tornam memórias para sempre</p>
-                </div>
-            </div>
-            <div class="service-detail-content">
-                <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
-                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                </a>
-                <h2>Ensaio de Família</h2>
-                <p>As famílias crescem, mudam e se transformam. Registrar esses momentos é criar um tesouro que vocês carregarão para sempre. Meus ensaios de família são descontraídos, cheios de espontaneidade e amor verdadeiro.</p>
-                <p>Não se preocupe com poses perfeitas — o que mais importa é a conexão entre vocês. Eu cuido de capturar os olhares, as risadas e os abraços que tornam a sua família única.</p>
-
-                <div class="service-features">
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Sessão Descontraída</h4>
-                            <p>Ambiente leve sem poses forçadas</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Todos Participam</h4>
-                            <p>Pets, avós e amigos são bem-vindos</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Lifestyle</h4>
-                            <p>Fotos naturais no estilo do dia a dia</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Álbum Disponível</h4>
-                            <p>Opção de álbum impresso personalizado</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="service-cta">
-                <h3>Vamos registrar a sua família?</h3>
-                <p>Cada fase merece ser eternizada com carinho</p>
-                <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-                    <i class="fa-regular fa-calendar"></i> Agendar Sessão
-                </a>
-            </div>
+  <div class="page" id="page-service-especiais">
+    <div class="service-detail">
+      <div class="service-detail-hero">
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200" alt="Fotografia Especial">
+        <div class="hero-overlay"></div>
+        <div class="service-detail-hero-content">
+          <div class="service-icon-lg"><i class="fa-solid fa-star"></i></div>
+          <h1>Especiais</h1>
+          <p>Momentos únicos que merecem um registro à altura</p>
         </div>
+      </div>
+      <div class="service-detail-content">
+        <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+        <h2>Sessões Especiais</h2>
+        <p>Além dos ensaios tradicionais, ofereço sessões personalizadas para momentos que fogem do comum mas que merecem igualmente ser eternizados. Cada evento especial tem sua própria emoção e energia, e eu adapto meu olhar para capturar exatamente o que torna aquele momento único.</p>
+        <p>Seja um batizado, um aniversário de 1 aninho, um smash the cake, uma sessão de amamentação ou qualquer outro marco na vida da sua família — estou aqui para documentar com sensibilidade e arte.</p>
+
+        <div class="service-features">
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Smash the Cake</h4>
+              <p>A diversão e a bagunça do primeiro bolinho do bebê</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Batizados e Eventos</h4>
+              <p>Cobertura completa de cerimônias e celebrações</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Amamentação</h4>
+              <p>Registro delicado do vínculo entre mãe e bebê</p>
+            </div>
+          </div>
+          <div class="service-feature">
+            <i class="fa-solid fa-check"></i>
+            <div>
+              <h4>Acompanhamento</h4>
+              <p>Sessões periódicas para documentar o crescimento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-cta">
+        <h3>Tem um momento especial para registrar?</h3>
+        <p>Conte-me sobre o evento e criamos algo personalizado</p>
+        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
+          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        </a>
+      </div>
     </div>
+  </div>
 
-    <div class="page" id="page-service-especiais">
-        <div class="service-detail">
-            <div class="service-detail-hero">
-                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200" alt="Fotografia Especial">
-                <div class="hero-overlay"></div>
-                <div class="service-detail-hero-content">
-                    <div class="service-icon-lg"><i class="fa-solid fa-star"></i></div>
-                    <h1>Especiais</h1>
-                    <p>Momentos únicos que merecem um registro à altura</p>
-                </div>
-            </div>
-            <div class="service-detail-content">
-                <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
-                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                </a>
-                <h2>Sessões Especiais</h2>
-                <p>Além dos ensaios tradicionais, ofereço sessões personalizadas para momentos que fogem do comum mas que merecem igualmente ser eternizados. Cada evento especial tem sua própria emoção e energia, e eu adapto meu olhar para capturar exatamente o que torna aquele momento único.</p>
-                <p>Seja um batizado, um aniversário de 1 aninho, um smash the cake, uma sessão de amamentação ou qualquer outro marco na vida da sua família — estou aqui para documentar com sensibilidade e arte.</p>
-
-                <div class="service-features">
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Smash the Cake</h4>
-                            <p>A diversão e a bagunça do primeiro bolinho do bebê</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Batizados e Eventos</h4>
-                            <p>Cobertura completa de cerimônias e celebrações</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Amamentação</h4>
-                            <p>Registro delicado do vínculo entre mãe e bebê</p>
-                        </div>
-                    </div>
-                    <div class="service-feature">
-                        <i class="fa-solid fa-check"></i>
-                        <div>
-                            <h4>Acompanhamento</h4>
-                            <p>Sessões periódicas para documentar o crescimento</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="service-cta">
-                <h3>Tem um momento especial para registrar?</h3>
-                <p>Conte-me sobre o evento e criamos algo personalizado</p>
-                <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-                    <i class="fa-regular fa-calendar"></i> Agendar Sessão
-                </a>
-            </div>
+  <!-- ==================== CONTATO PAGE ==================== -->
+  <div class="page" id="page-contato">
+    <div class="contato-page">
+      <div class="contato-hero">
+        <div>
+          <h1>Contato</h1>
+          <p>Adoraria ouvir você</p>
         </div>
-    </div>
+      </div>
+      <div class="contato-body">
+        <div class="contato-info">
+          <h3>Informações</h3>
 
-    <!-- ==================== CONTATO PAGE ==================== -->
-    <div class="page" id="page-contato">
-        <div class="contato-page">
-            <div class="contato-hero">
-                <div>
-                    <h1>Contato</h1>
-                    <p>Adoraria ouvir você</p>
-                </div>
+          <div class="contato-info-item">
+            <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div>
+              <h4>WhatsApp</h4>
+              <p><a href="#" id="contactWhatsappLink">+55 11 99999-9999</a></p>
             </div>
-            <div class="contato-body">
-                <div class="contato-info">
-                    <h3>Informações</h3>
-                    <div class="contato-info-item">
-                        <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                        <div>
-                            <h4>WhatsApp</h4>
-                            <p><a href="#" id="contactWhatsappLink">+55 11 99999-9999</a></p>
-                        </div>
-                    </div>
-                    <div class="contato-info-item">
-                        <div class="info-icon"><i class="fa-regular fa-envelope"></i></div>
-                        <div>
-                            <h4>E-mail</h4>
-                            <p><a href="#" id="contactEmailLink">contato@Kelly Almeidafoto.com</a></p>
-                        </div>
-                    </div>
-                    <div class="contato-info-item">
-                        <div class="info-icon"><i class="fa-brands fa-instagram"></i></div>
-                        <div>
-                            <h4>Instagram</h4>
-                            <p><a href="#" id="contactInstaLink" target="_blank">@Kelly Almeidafotografia</a></p>
-                        </div>
-                    </div>
-                    <div class="contato-info-item">
-                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div>
-                            <h4>Localização</h4>
-                            <p>São Paulo, SP — Atendimento em toda a região</p>
-                        </div>
-                    </div>
-                    <div class="contato-social">
-                        <a href="#" id="socialInsta"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" id="socialFb"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" id="socialPin"><i class="fa-brands fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-                <div class="contato-form">
-                    <h3>Envie uma mensagem</h3>
-                    <form onsubmit="handleContactForm(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Nome</label>
-                                <input type="text" placeholder="Seu nome" required>
-                            </div>
-                            <div class="form-group">
-                                <label>E-mail</label>
-                                <input type="email" placeholder="seu@email.com" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Assunto</label>
-                            <select>
-                                <option value="">Selecione...</option>
-                                <option>Fotografia de Parto</option>
-                                <option>Ensaio Gestante</option>
-                                <option>Ensaio de Família</option>
-                                <option>Sessão Especial</option>
-                                <option>Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Mensagem</label>
-                            <textarea placeholder="Conte um pouco sobre o que você precisa..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-                            <i class="fa-regular fa-paper-plane"></i> Enviar Mensagem
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+          </div>
 
-    <!-- ==================== AGENDAMENTO PAGE ==================== -->
-    <div class="page" id="page-agendamento">
-        <div class="agendamento-page">
-            <div class="agendamento-hero">
-                <div>
-                    <h1>Agendamento</h1>
-                    <p>Escolha a melhor data para a sua sessão</p>
-                </div>
+          <div class="contato-info-item">
+            <div class="info-icon"><i class="fa-regular fa-envelope"></i></div>
+            <div>
+              <h4>E-mail</h4>
+              <p><a href="#" id="contactEmailLink">contato@kellyfoto.com</a></p>
             </div>
-            <div class="agendamento-body">
-                <div class="agendamento-steps">
-                    <div class="agendamento-step">
-                        <div class="step-number">1</div>
-                        <p>Preencha</p>
-                    </div>
-                    <div class="agendamento-step">
-                        <div class="step-number">2</div>
-                        <p>Confirme</p>
-                    </div>
-                    <div class="agendamento-step">
-                        <div class="step-number">3</div>
-                        <p>Pronto!</p>
-                    </div>
-                </div>
-                <div class="agendamento-form-card">
-                    <h3>Agende sua Sessão</h3>
-                    <p>Preencha os dados e entrarei em contato para confirmar</p>
-                    <form onsubmit="handleBookingForm(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Nome completo</label>
-                                <input type="text" placeholder="Seu nome" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Telefone / WhatsApp</label>
-                                <input type="tel" placeholder="(11) 99999-9999" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail</label>
-                            <input type="email" placeholder="seu@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Tipo de Sessão</label>
-                            <select required>
-                                <option value="">Selecione o serviço...</option>
-                                <option>Fotografia de Parto</option>
-                                <option>Ensaio Gestante</option>
-                                <option>Ensaio de Família</option>
-                                <option>Sessão Especial (Smash the Cake, Batizado, etc.)</option>
-                            </select>
-                        </div>
-                        <div class="date-grid">
-                            <div class="form-group">
-                                <label>Data preferida</label>
-                                <input type="date" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Horário preferido</label>
-                                <select>
-                                    <option>Manhã (8h - 12h)</option>
-                                    <option>Tarde (13h - 17h)</option>
-                                    <option>Fim de tarde (17h - 19h)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Semanas de gestação (se aplicável)</label>
-                            <input type="text" placeholder="Ex: 30 semanas">
-                        </div>
-                        <div class="form-group">
-                            <label>Observações</label>
-                            <textarea placeholder="Algo mais que gostaria de compartilhar?"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-                            <i class="fa-regular fa-calendar-check"></i> Solicitar Agendamento
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+          </div>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="logo" onclick="navigateTo('home')">Kelly Almeida <span>Fotografia</span></div>
-                <p>Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.</p>
+          <div class="contato-info-item">
+            <div class="info-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div>
+              <h4>Instagram</h4>
+              <p><a href="#" id="contactInstaLink" target="_blank">@kellyalmeidafoto</a></p>
             </div>
-            <div class="footer-links">
-                <h4>Navegação</h4>
-                <a href="#" onclick="navigateTo('home'); return false;">Início</a>
-                <a href="#" onclick="navigateTo('contato'); return false;">Contato</a>
-                <a href="#" onclick="navigateTo('agendamento'); return false;">Agendamento</a>
-            </div>
-            <div class="footer-links">
-                <h4>Serviços</h4>
-                <a href="#" onclick="navigateTo('service-partos'); return false;">Partos</a>
-                <a href="#" onclick="navigateTo('service-gestante'); return false;">Gestante</a>
-                <a href="#" onclick="navigateTo('service-familia'); return false;">Família</a>
-                <a href="#" onclick="navigateTo('service-especiais'); return false;">Especiais</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Kelly Almeida Fotografia &mdash; Todos os direitos reservados</p>
-        </div>
-    </footer>
+          </div>
 
-    <!-- ==================== LOGIN ==================== -->
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-box">
-            <h2>Área Restrita</h2>
+          <div class="contato-info-item">
+            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <h4>Localização</h4>
+              <p>São Paulo, SP — Atendimento em toda a região</p>
+            </div>
+          </div>
+
+          <div class="contato-social">
+            <a href="#" id="socialInsta"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" id="socialFb"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" id="socialPin"><i class="fa-brands fa-pinterest-p"></i></a>
+          </div>
+        </div>
+
+        <div class="contato-form">
+          <h3>Envie uma mensagem</h3>
+          <form onsubmit="handleContactForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome</label>
+                <input type="text" placeholder="Seu nome" required>
+              </div>
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" placeholder="seu@email.com" required>
+              </div>
+            </div>
             <div class="form-group">
-                <label>Senha</label>
-                <input type="password" id="adminPassword" placeholder="Digite a senha">
+              <label>Assunto</label>
+              <select>
+                <option value="">Selecione...</option>
+                <option>Fotografia de Parto</option>
+                <option>Ensaio Gestante</option>
+                <option>Ensaio de Família</option>
+                <option>Sessão Especial</option>
+                <option>Outro</option>
+              </select>
             </div>
-            <button class="btn-save" onclick="checkPassword()">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i> Entrar
+            <div class="form-group">
+              <label>Mensagem</label>
+              <textarea placeholder="Conte um pouco sobre o que você precisa..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              <i class="fa-regular fa-paper-plane"></i> Enviar Mensagem
             </button>
-            <p style="margin-top: 20px; font-size: 0.8rem; color: #bbb; text-align: center;">
-                Senha padrão: <strong>admin123</strong>
-            </p>
+          </form>
         </div>
+
+      </div>
     </div>
+  </div>
 
-    <!-- ==================== ADMIN PANEL ==================== -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-header">
-            <h2><i class="fa-solid fa-sliders"></i> Painel Admin</h2>
-            <button class="close-admin" onclick="closeAdmin()"><i class="fa-solid fa-xmark"></i></button>
+  <!-- ==================== AGENDAMENTO PAGE ==================== -->
+  <div class="page" id="page-agendamento">
+    <div class="agendamento-page">
+      <div class="agendamento-hero">
+        <div>
+          <h1>Agendamento</h1>
+          <p>Escolha a melhor data para a sua sessão</p>
         </div>
-        <div class="admin-content">
-            <!-- Gerenciador de Fotos Unificado -->
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-camera"></i> Gerenciar Fotos</h3>
-                <div class="form-group">
-                    <label>Selecione a seção</label>
-                    <select id="photoSectionSelect" onchange="switchPhotoSection()">
-                        <option value="hero">Hero (Tela Inicial)</option>
-                        <option value="partos">Partos</option>
-                        <option value="gestante">Gestante</option>
-                        <option value="familia">Família</option>
-                        <option value="especiais">Especiais</option>
-                    </select>
-                </div>
-                <p id="photoSectionHint" style="font-size:0.82rem; color:#999; margin-bottom:15px;"></p>
-                <div class="upload-dropzone" id="sectionDropzone" onclick="document.getElementById('sectionUploadInput').click()">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <p>Arraste fotos ou clique para selecionar</p>
-                    <p class="upload-hint">JPG, PNG ou WebP</p>
-                </div>
-                <input type="file" id="sectionUploadInput" multiple accept="image/*" style="display:none" onchange="handleSectionUpload(event)">
-                <div class="gallery-manager" id="sectionPhotoManager"></div>
-                <button class="btn-add" id="sectionAddBtn" onclick="addSectionPhoto()"><i class="fa-solid fa-plus"></i> Adicionar via URL</button>
+      </div>
+      <div class="agendamento-body">
+        <div class="agendamento-steps">
+          <div class="agendamento-step">
+            <div class="step-number">1</div>
+            <p>Preencha</p>
+          </div>
+          <div class="agendamento-step">
+            <div class="step-number">2</div>
+            <p>Confirme</p>
+          </div>
+          <div class="agendamento-step">
+            <div class="step-number">3</div>
+            <p>Pronto!</p>
+          </div>
+        </div>
+
+        <div class="agendamento-form-card">
+          <h3>Agende sua Sessão</h3>
+          <p>Preencha os dados e entrarei em contato para confirmar</p>
+
+          <form onsubmit="handleBookingForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome completo</label>
+                <input type="text" placeholder="Seu nome" required>
+              </div>
+              <div class="form-group">
+                <label>Telefone / WhatsApp</label>
+                <input type="tel" placeholder="(11) 99999-9999" required>
+              </div>
             </div>
 
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-images"></i> Modo Galeria</h3>
-                <div class="form-group">
-                    <label>Escolha o modo</label>
-                    <select id="galleryMode" onchange="toggleGalleryMode()">
-                        <option value="manual">Manual (Adicionar fotos)</option>
-                        <option value="instagram">Instagram (Perfil público)</option>
-                    </select>
-                </div>
-                <div id="instagramSettings" style="display: none;">
-                    <div class="instagram-mode">
-                        <h4><i class="fa-brands fa-instagram"></i> Modo Instagram Ativado</h4>
-                        <p style="font-size: 0.85rem; opacity: 0.9;">As fotos serão puxadas do seu perfil público.</p>
-                    </div>
-                    <div class="form-group">
-                        <label>Username (sem @)</label>
-                        <input type="text" id="instagramUsername" placeholder="Kelly Almeidafotografia">
-                    </div>
-                    <div class="info-box">
-                        <i class="fa-solid fa-circle-info"></i> Seu perfil precisa ser público para as fotos aparecerem.
-                    </div>
-                </div>
-                <div id="manualSettings">
-                    <div class="upload-dropzone" id="uploadDropzone" onclick="document.getElementById('bulkUploadInput').click()">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <p>Arraste fotos aqui ou clique para selecionar</p>
-                        <p class="upload-hint">JPG, PNG ou WebP — várias fotos de uma vez</p>
-                    </div>
-                    <input type="file" id="bulkUploadInput" multiple accept="image/*" style="display:none" onchange="handleBulkUpload(event)">
-                    <div class="storage-warning" id="storageWarning" style="display:none;">
-                        <i class="fa-solid fa-triangle-exclamation"></i> Espaço de armazenamento local limitado. Fotos são redimensionadas automaticamente.
-                    </div>
-                    <div class="gallery-manager" id="galleryManager"></div>
-                    <button class="btn-add" onclick="addGalleryItem()"><i class="fa-solid fa-plus"></i> Adicionar via URL</button>
-                </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="seu@email.com" required>
             </div>
 
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-pen"></i> Informações Básicas</h3>
-                <div class="form-group">
-                    <label>Nome do Site</label>
-                    <input type="text" id="editSiteName" placeholder="Kelly Almeida Fotografia">
-                </div>
-                <div class="form-group">
-                    <label>Título Hero</label>
-                    <input type="text" id="editHeroTitle" placeholder="Kelly Almeida Fotografia">
-                </div>
-                <div class="form-group">
-                    <label>Subtítulo Hero</label>
-                    <input type="text" id="editHeroSubtitle" placeholder="Partos • Gestantes • Família">
-                </div>
+            <div class="form-group">
+              <label>Tipo de Sessão</label>
+              <select required>
+                <option value="">Selecione o serviço...</option>
+                <option>Fotografia de Parto</option>
+                <option>Ensaio Gestante</option>
+                <option>Ensaio de Família</option>
+                <option>Sessão Especial (Smash the Cake, Batizado, etc.)</option>
+              </select>
             </div>
 
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-user"></i> Sobre Mim</h3>
-                <div class="form-group">
-                    <label>Foto (URL)</label>
-                    <input type="text" id="editAboutImage" placeholder="https://...">
-                </div>
-                <div class="form-group">
-                    <label>Texto</label>
-                    <textarea id="editAboutText" placeholder="Conte sua história..."></textarea>
-                </div>
+            <div class="date-grid">
+              <div class="form-group">
+                <label>Data preferida</label>
+                <input type="date" required>
+              </div>
+              <div class="form-group">
+                <label>Horário preferido</label>
+                <select>
+                  <option>Manhã (8h - 12h)</option>
+                  <option>Tarde (13h - 17h)</option>
+                  <option>Fim de tarde (17h - 19h)</option>
+                </select>
+              </div>
             </div>
 
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-address-book"></i> Contato</h3>
-                <div class="form-group">
-                    <label>WhatsApp (com código)</label>
-                    <input type="text" id="editWhatsapp" placeholder="5511999999999">
-                </div>
-                <div class="form-group">
-                    <label>Instagram (@)</label>
-                    <input type="text" id="editInstagram" placeholder="Kelly Almeidafotografia">
-                </div>
-                <div class="form-group">
-                    <label>E-mail</label>
-                    <input type="email" id="editEmail" placeholder="contato@Kelly Almeidafoto.com">
-                </div>
+            <div class="form-group">
+              <label>Semanas de gestação (se aplicável)</label>
+              <input type="text" placeholder="Ex: 30 semanas">
             </div>
 
-            <!-- CTA / Vamos Conversar -->
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-bullhorn"></i> Seção "Vamos Conversar"</h3>
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" id="editCtaTitle" placeholder="Vamos Conversar?">
-                </div>
-                <div class="form-group">
-                    <label>Subtítulo</label>
-                    <input type="text" id="editCtaSubtitle" placeholder="Entre em contato e vamos criar algo lindo juntas">
-                </div>
+            <div class="form-group">
+              <label>Observações</label>
+              <textarea placeholder="Algo mais que gostaria de compartilhar?"></textarea>
             </div>
 
-            <!-- Footer -->
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-shoe-prints"></i> Footer</h3>
-                <div class="form-group">
-                    <label>Texto do rodapé</label>
-                    <textarea id="editFooterText" placeholder="Capturando os momentos mais preciosos..."></textarea>
-                </div>
-            </div>
-
-            <!-- Textos das Subpáginas de Serviço -->
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-file-lines"></i> Textos dos Serviços</h3>
-                <div class="form-group">
-                    <label>Selecione o serviço</label>
-                    <select id="serviceTextSelect" onchange="switchServiceText()">
-                        <option value="partos">Partos</option>
-                        <option value="gestante">Gestante</option>
-                        <option value="familia">Família</option>
-                        <option value="especiais">Especiais</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Título da página</label>
-                    <input type="text" id="editServiceTitle">
-                </div>
-                <div class="form-group">
-                    <label>Subtítulo (hero)</label>
-                    <input type="text" id="editServiceSubtitle">
-                </div>
-                <div class="form-group">
-                    <label>Texto descritivo</label>
-                    <textarea id="editServiceText" style="min-height:150px;"></textarea>
-                </div>
-                <div class="info-box">
-                    <i class="fa-solid fa-circle-info"></i> Separe parágrafos com uma linha em branco. Os destaques (features) são atualizados automaticamente ao salvar.
-                </div>
-            </div>
-
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-palette"></i> Cores do Site</h3>
-                <div class="form-group">
-                    <label>Cor Principal</label>
-                    <div class="color-input">
-                        <input type="color" id="editColorPrimary" value="#E8D5C4">
-                        <input type="text" id="editColorPrimaryText" value="#E8D5C4">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Cor Secundária</label>
-                    <div class="color-input">
-                        <input type="color" id="editColorSecondary" value="#C9ADA1">
-                        <input type="text" id="editColorSecondaryText" value="#C9ADA1">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Cor de Destaque</label>
-                    <div class="color-input">
-                        <input type="color" id="editColorAccent" value="#A0826D">
-                        <input type="text" id="editColorAccentText" value="#A0826D">
-                    </div>
-                </div>
-            </div>
-
-            <div class="admin-section">
-                <h3><i class="fa-solid fa-lock"></i> Alterar Senha</h3>
-                <div class="form-group">
-                    <label>Nova Senha</label>
-                    <input type="password" id="editPassword" placeholder="Digite nova senha">
-                </div>
-            </div>
-
-            <button class="btn-save" onclick="saveAll()">
-                <i class="fa-solid fa-floppy-disk"></i> Salvar Tudo
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              <i class="fa-regular fa-calendar-check"></i> Solicitar Agendamento
             </button>
+          </form>
+
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
-        const defaultData = {
-            siteName: 'Kelly Almeida Fotografia',
-            heroTitle: 'Kelly Almeida Fotografia',
-            heroSubtitle: 'Partos \u2022 Gestantes \u2022 Família',
-            aboutImage: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800',
-            aboutText: 'Olá! Sou Kelly Almeida, fotógrafa especializada em capturar os momentos mais preciosos da sua família. Com mais de 5 anos de experiência, minha missão é eternizar o amor, a delicadeza e a magia dos primeiros dias de vida.\n\nCada sessão é única e personalizada, sempre pensada com carinho para proporcionar conforto e segurança para você e seu bebê.',
-            galleryMode: 'manual',
-            instagramUsername: '',
-            gallery: [
-                {url: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800', title: 'Parto \u00b7 João'},
-                {url: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800', title: 'Parto \u00b7 Maria'},
-                {url: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800', title: 'Gestante \u00b7 Ana'},
-                {url: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800', title: 'Família \u00b7 Silva'},
-                {url: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800', title: 'Parto \u00b7 Pedro'},
-                {url: 'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800', title: 'Parto \u00b7 Laura'}
-            ],
-            whatsapp: '5511999999999',
-            instagram: 'Kelly Almeidafotografia',
-            email: 'contato@Kelly Almeidafoto.com',
-            ctaTitle: 'Vamos Conversar?',
-            ctaSubtitle: 'Entre em contato e vamos criar algo lindo juntas',
-            footerText: 'Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.',
-            serviceDetails: {
-                partos: {
-                    title: 'Fotografia de Parto',
-                    subtitle: 'O primeiro encontro mais emocionante da vida',
-                    text: 'A chegada de um bebê é um dos momentos mais transformadores e emocionantes na vida de uma família. Como fotógrafa de partos, meu papel é estar presente de forma discreta e respeitosa, capturando cada emoção, cada olhar, cada toque com sensibilidade artística.\n\nTrabalho tanto em partos hospitalares quanto domiciliares, sempre priorizando o conforto e a privacidade da família. Fico de sobreaviso a partir da 37ª semana, garantindo que estarei lá no momento certo.',
-                    features: 'Sobreaviso 24h|Disponível a qualquer hora a partir da 37ª semana||Cobertura Completa|Do trabalho de parto aos primeiros momentos do bebê||Galeria Online|Fotos tratadas entregues em galeria privada||Hospital ou Domiciliar|Atendimento em qualquer local de nascimento'
-                },
-                gestante: {
-                    title: 'Ensaio Gestante',
-                    subtitle: 'Eternize a espera mais linda da sua vida',
-                    text: 'A gestação é um período mágico e passageiro. Cada curva, cada momento de conexão com o bebê que está por vir merece ser celebrado e documentado com arte e delicadeza.\n\nO ensaio gestante é recomendado entre a 28ª e 34ª semana de gestação, quando a barriguinha está linda e a mamãe ainda está confortável. Podemos fazer em estúdio, ao ar livre ou na sua casa — o importante é que você se sinta à vontade.',
-                    features: 'Consultoria de Look|Ajudo a escolher roupas e acessórios ideais||Locação Flexível|Estúdio, ao ar livre ou na sua casa||Família Inclusa|Papai e irmãozinhos participam sem custo extra||Edição Artística|Tratamento profissional em todas as fotos'
-                },
-                familia: {
-                    title: 'Ensaio de Família',
-                    subtitle: 'Momentos que se tornam memórias para sempre',
-                    text: 'As famílias crescem, mudam e se transformam. Registrar esses momentos é criar um tesouro que vocês carregarão para sempre. Meus ensaios de família são descontraídos, cheios de espontaneidade e amor verdadeiro.\n\nNão se preocupe com poses perfeitas — o que mais importa é a conexão entre vocês. Eu cuido de capturar os olhares, as risadas e os abraços que tornam a sua família única.',
-                    features: 'Sessão Descontraída|Ambiente leve sem poses forçadas||Todos Participam|Pets, avós e amigos são bem-vindos||Lifestyle|Fotos naturais no estilo do dia a dia||Álbum Disponível|Opção de álbum impresso personalizado'
-                },
-                especiais: {
-                    title: 'Sessões Especiais',
-                    subtitle: 'Momentos únicos que merecem um registro à altura',
-                    text: 'Além dos ensaios tradicionais, ofereço sessões personalizadas para momentos que fogem do comum mas que merecem igualmente ser eternizados. Cada evento especial tem sua própria emoção e energia, e eu adapto meu olhar para capturar exatamente o que torna aquele momento único.\n\nSeja um batizado, um ensaio de Natal, um aniversário especial ou qualquer outro marco na vida da sua família — estou aqui para documentar com sensibilidade e arte.',
-                    features: 'Batizados|Registro completo da cerimônia e dos detalhes especiais||Ensaios de Natal|Sessões temáticas para criar memórias mágicas de fim de ano||Aniversários|Do primeiro aninho às grandes celebrações em família||Acompanhamento|Sessões periódicas para documentar o crescimento'
-                }
-            },
-            heroImages: [
-                'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1400',
-                'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1400',
-                'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1400',
-                'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1400',
-                'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1400'
-            ],
-            serviceImages: {
-                partos: 'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800',
-                gestante: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800',
-                familia: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800',
-                especiais: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800'
-            },
-            colors: { primary: '#E8D5C4', secondary: '#C9ADA1', accent: '#A0826D' },
-            password: 'admin123'
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo" onclick="navigateTo('home')">Kelly Almeida <span>Fotografia</span></div>
+        <p>Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <a href="#" onclick="navigateTo('home'); return false;">Início</a>
+        <a href="#" onclick="navigateTo('contato'); return false;">Contato</a>
+        <a href="#" onclick="navigateTo('agendamento'); return false;">Agendamento</a>
+      </div>
+      <div class="footer-links">
+        <h4>Serviços</h4>
+        <a href="#" onclick="navigateTo('service-partos'); return false;">Partos</a>
+        <a href="#" onclick="navigateTo('service-gestante'); return false;">Gestante</a>
+        <a href="#" onclick="navigateTo('service-familia'); return false;">Família</a>
+        <a href="#" onclick="navigateTo('service-especiais'); return false;">Especiais</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footerCopyright">&copy; <span id="footerYear"></span> Kelly Almeida Fotografia &mdash; Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // ✅ Fonte padrão (fallback) caso /data/site.json ainda não exista
+    const defaultData = {
+      siteName: 'Kelly Almeida Fotografia',
+      heroTitle: 'Kelly Almeida',
+      heroSubtitle: 'Partos \u2022 Gestantes \u2022 Família',
+      aboutImage: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800',
+      aboutText: 'Olá! Sou Kelly, fotógrafa especializada em capturar os momentos mais preciosos da sua família.\n\nCada sessão é única e personalizada, sempre pensada com carinho para proporcionar conforto e segurança.',
+      galleryMode: 'manual',
+      instagramUsername: '',
+      gallery: [
+        {url: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800', title: 'Parto \u00b7 João'},
+        {url: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800', title: 'Parto \u00b7 Maria'},
+        {url: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800', title: 'Gestante \u00b7 Ana'},
+        {url: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800', title: 'Família \u00b7 Silva'},
+        {url: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800', title: 'Parto \u00b7 Pedro'},
+        {url: 'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800', title: 'Parto \u00b7 Laura'}
+      ],
+      whatsapp: '5511999999999',
+      instagram: 'kellyalmeidafoto',
+      email: 'contato@kellyfoto.com',
+      ctaTitle: 'Vamos Conversar?',
+      ctaSubtitle: 'Entre em contato e vamos criar algo lindo juntas',
+      footerText: 'Capturando os momentos mais preciosos da sua família com arte, sensibilidade e amor.',
+      serviceDetails: {
+        partos: {
+          title: 'Fotografia de Parto',
+          subtitle: 'O primeiro encontro mais emocionante da vida',
+          text: 'A chegada de um bebê é um dos momentos mais transformadores e emocionantes na vida de uma família.\n\nTrabalho tanto em partos hospitalares quanto domiciliares, sempre priorizando o conforto e a privacidade da família.',
+          features: 'Sobreaviso 24h|Disponível a qualquer hora a partir da 37ª semana||Cobertura Completa|Do trabalho de parto aos primeiros momentos do bebê||Galeria Online|Fotos tratadas entregues em galeria privada||Hospital ou Domiciliar|Atendimento em qualquer local de nascimento'
+        },
+        gestante: {
+          title: 'Ensaio Gestante',
+          subtitle: 'Eternize a espera mais linda da sua vida',
+          text: 'A gestação é um período mágico e passageiro.\n\nO ensaio gestante é recomendado entre a 28ª e 34ª semana de gestação.',
+          features: 'Consultoria de Look|Ajudo a escolher roupas e acessórios ideais||Locação Flexível|Estúdio, ao ar livre ou na sua casa||Família Inclusa|Papai e irmãozinhos participam sem custo extra||Edição Artística|Tratamento profissional em todas as fotos'
+        },
+        familia: {
+          title: 'Ensaio de Família',
+          subtitle: 'Momentos que se tornam memórias para sempre',
+          text: 'As famílias crescem, mudam e se transformam.\n\nO que mais importa é a conexão entre vocês.',
+          features: 'Sessão Descontraída|Ambiente leve sem poses forçadas||Todos Participam|Pets, avós e amigos são bem-vindos||Lifestyle|Fotos naturais no estilo do dia a dia||Álbum Disponível|Opção de álbum impresso personalizado'
+        },
+        especiais: {
+          title: 'Sessões Especiais',
+          subtitle: 'Momentos únicos que merecem um registro à altura',
+          text: 'Sessões personalizadas para momentos que fogem do comum, mas merecem ser eternizados.\n\nConte comigo para documentar com sensibilidade e arte.',
+          features: 'Smash the Cake|A diversão e a bagunça do primeiro bolinho do bebê||Batizados e Eventos|Cobertura completa de cerimônias e celebrações||Amamentação|Registro delicado do vínculo entre mãe e bebê||Acompanhamento|Sessões periódicas para documentar o crescimento'
+        }
+      },
+      heroImages: [
+        'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1400',
+        'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1400',
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1400',
+        'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1400',
+        'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1400'
+      ],
+      serviceImages: {
+        partos: 'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800',
+        gestante: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800',
+        familia: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800',
+        especiais: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800'
+      },
+      colors: { primary: '#E8D5C4', secondary: '#C9ADA1', accent: '#A0826D' }
+    };
+
+    // Estado
+    let siteData = defaultData;
+
+    // Serviços (cards)
+    const servicesData = [
+      { id: 'partos',    title: 'Partos',    desc: 'O registro sensível e emocionante da chegada do seu bebê ao mundo.', icon: 'fa-solid fa-heart-pulse' },
+      { id: 'gestante',  title: 'Gestante',  desc: 'Eternize a espera mais linda da sua vida com sessões delicadas.',      icon: 'fa-solid fa-seedling' },
+      { id: 'familia',   title: 'Família',   desc: 'Capture os momentos espontâneos e cheios de amor em família.',         icon: 'fa-solid fa-people-roof' },
+      { id: 'especiais', title: 'Especiais', desc: 'Batizados, ensaios de Natal, aniversários e outros marcos especiais.', icon: 'fa-solid fa-star' }
+    ];
+
+    // Slideshow
+    let currentSlide = 0;
+    let slideInterval;
+
+    // ✅ Carrega dados do CMS (Netlify CMS salva em /data/site.json)
+    async function fetchSiteData() {
+      try {
+        const res = await fetch('/data/site.json', { cache: 'no-store' });
+        if (!res.ok) return defaultData;
+
+        const json = await res.json();
+
+        // merge simples pra garantir que nada quebra se faltar campo
+        return {
+          ...defaultData,
+          ...json,
+          colors: { ...defaultData.colors, ...(json.colors || {}) },
+          serviceDetails: { ...defaultData.serviceDetails, ...(json.serviceDetails || {}) },
+          serviceImages: { ...defaultData.serviceImages, ...(json.serviceImages || {}) },
+          heroImages: Array.isArray(json.heroImages) ? json.heroImages : defaultData.heroImages,
+          gallery: Array.isArray(json.gallery) ? json.gallery : defaultData.gallery
         };
+      } catch (e) {
+        return defaultData;
+      }
+    }
 
-        let siteData = JSON.parse(localStorage.getItem('portfolioData')) || defaultData;
+    function initHeroSlideshow() {
+      const container = document.getElementById('heroSlides');
+      const indicators = document.getElementById('heroIndicators');
 
-        // Ensure new fields exist for older stored data
-        if (!siteData.heroImages) siteData.heroImages = defaultData.heroImages;
-        if (!siteData.serviceImages) siteData.serviceImages = defaultData.serviceImages;
-        if (!siteData.ctaTitle) siteData.ctaTitle = defaultData.ctaTitle;
-        if (!siteData.ctaSubtitle) siteData.ctaSubtitle = defaultData.ctaSubtitle;
-        if (!siteData.footerText) siteData.footerText = defaultData.footerText;
-        if (!siteData.serviceDetails) siteData.serviceDetails = defaultData.serviceDetails;
+      const shuffled = (siteData.heroImages || []).slice().sort(function() { return Math.random() - 0.5; });
 
-        var servicesData = [
-            {
-                id: 'partos',
-                title: 'Partos',
-                desc: 'O registro sensível e emocionante da chegada do seu bebê ao mundo.',
-                icon: 'fa-solid fa-heart-pulse'
-            },
-            {
-                id: 'gestante',
-                title: 'Gestante',
-                desc: 'Eternize a espera mais linda da sua vida com sessões delicadas.',
-                icon: 'fa-solid fa-seedling'
-            },
-            {
-                id: 'familia',
-                title: 'Família',
-                desc: 'Capture os momentos espontâneos e cheios de amor em família.',
-                icon: 'fa-solid fa-people-roof'
-            },
-            {
-                id: 'especiais',
-                title: 'Especiais',
-                desc: 'Batizados, ensaios de Natal, aniversários e outros marcos especiais.',
-                icon: 'fa-solid fa-star'
-            }
-        ];
+      container.innerHTML = shuffled.map((src, i) =>
+        '<div class="hero-slide ' + (i === 0 ? 'active' : '') + '">' +
+          '<img src="' + src + '" alt="Portfolio ' + (i+1) + '">' +
+        '</div>'
+      ).join('');
 
-        let currentSlide = 0;
-        let slideInterval;
+      indicators.innerHTML = shuffled.map((_, i) =>
+        '<div class="hero-indicator ' + (i === 0 ? 'active' : '') + '" onclick="goToSlide(' + i + ')"></div>'
+      ).join('');
 
-        function initHeroSlideshow() {
-            var container = document.getElementById('heroSlides');
-            var indicators = document.getElementById('heroIndicators');
-            var shuffled = (siteData.heroImages || []).slice().sort(function() { return Math.random() - 0.5; });
+      clearInterval(slideInterval);
+      currentSlide = 0;
+      slideInterval = setInterval(nextSlide, 6000);
+    }
 
-            container.innerHTML = shuffled.map((src, i) =>
-                '<div class="hero-slide ' + (i === 0 ? 'active' : '') + '">' +
-                '<img src="' + src + '" alt="Portfolio ' + (i+1) + '">' +
-                '</div>'
-            ).join('');
+    function nextSlide() {
+      const slides = document.querySelectorAll('.hero-slide');
+      const indicators = document.querySelectorAll('.hero-indicator');
+      if (slides.length === 0) return;
 
-            indicators.innerHTML = shuffled.map((_, i) =>
-                '<div class="hero-indicator ' + (i === 0 ? 'active' : '') + '" onclick="goToSlide(' + i + ')"></div>'
-            ).join('');
+      slides[currentSlide].classList.remove('active');
+      if (indicators[currentSlide]) indicators[currentSlide].classList.remove('active');
 
-            slideInterval = setInterval(nextSlide, 6000);
-        }
+      currentSlide = (currentSlide + 1) % slides.length;
 
-        function nextSlide() {
-            const slides = document.querySelectorAll('.hero-slide');
-            const indicators = document.querySelectorAll('.hero-indicator');
-            if (slides.length === 0) return;
-            slides[currentSlide].classList.remove('active');
-            indicators[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
-        }
+      slides[currentSlide].classList.add('active');
+      if (indicators[currentSlide]) indicators[currentSlide].classList.add('active');
+    }
 
-        function goToSlide(index) {
-            const slides = document.querySelectorAll('.hero-slide');
-            const indicators = document.querySelectorAll('.hero-indicator');
-            slides[currentSlide].classList.remove('active');
-            indicators[currentSlide].classList.remove('active');
-            currentSlide = index;
-            slides[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 6000);
-        }
+    function goToSlide(index) {
+      const slides = document.querySelectorAll('.hero-slide');
+      const indicators = document.querySelectorAll('.hero-indicator');
+      if (!slides.length) return;
 
-        // ========== NAVIGATION ==========
-        function navigateTo(pageId) {
-            document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-            var target = document.getElementById('page-' + pageId);
-            if (target) target.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.getElementById('mainMenu').classList.remove('open');
-        }
+      slides[currentSlide].classList.remove('active');
+      if (indicators[currentSlide]) indicators[currentSlide].classList.remove('active');
 
-        function scrollToSection(sectionId) {
-            navigateTo('home');
-            setTimeout(function() {
-                var el = document.getElementById(sectionId);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-            document.getElementById('mainMenu').classList.remove('open');
-        }
+      currentSlide = index;
 
-        function toggleMobileMenu() {
-            document.getElementById('mainMenu').classList.toggle('open');
-        }
+      slides[currentSlide].classList.add('active');
+      if (indicators[currentSlide]) indicators[currentSlide].classList.add('active');
 
-        // ========== LOAD SITE ==========
-        function loadSite() {
-            var parts = siteData.siteName.split(' ');
-            var logoHtml = parts[0] + (parts[1] ? ' <span>' + parts.slice(1).join(' ') + '</span>' : '');
-            document.querySelectorAll('.logo').forEach(function(el) { el.innerHTML = logoHtml; });
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 6000);
+    }
 
-            document.getElementById('heroTitle').textContent = siteData.heroTitle;
-            document.getElementById('heroSubtitle').textContent = siteData.heroSubtitle;
-            document.getElementById('aboutImage').src = siteData.aboutImage;
-            document.getElementById('aboutText').innerHTML = siteData.aboutText.split('\n').filter(function(p) { return p.trim(); }).map(function(p) { return '<p>' + p + '</p>'; }).join('');
+    // ========== NAVIGATION ==========
+    function navigateTo(pageId) {
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('mainMenu').classList.remove('open');
+    }
 
-            loadGallery();
-            loadServices();
+    function scrollToSection(sectionId) {
+      navigateTo('home');
+      setTimeout(function() {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+      document.getElementById('mainMenu').classList.remove('open');
+    }
 
-            document.getElementById('contactLinks').innerHTML =
-                '<a href="https://wa.me/' + siteData.whatsapp + '" class="contato-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
-                '<a href="https://instagram.com/' + siteData.instagram + '" class="contato-btn" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>' +
-                '<a href="mailto:' + siteData.email + '" class="contato-btn"><i class="fa-regular fa-envelope"></i> E-mail</a>' +
-                '<a href="#" class="contato-btn" onclick="navigateTo(\'agendamento\'); return false;"><i class="fa-regular fa-calendar"></i> Agendar</a>';
+    function toggleMobileMenu() {
+      document.getElementById('mainMenu').classList.toggle('open');
+    }
 
-            document.getElementById('contactWhatsappLink').href = 'https://wa.me/' + siteData.whatsapp;
-            document.getElementById('contactWhatsappLink').textContent = '+' + siteData.whatsapp.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, '$1 $2 $3-$4');
-            document.getElementById('contactEmailLink').href = 'mailto:' + siteData.email;
-            document.getElementById('contactEmailLink').textContent = siteData.email;
-            document.getElementById('contactInstaLink').href = 'https://instagram.com/' + siteData.instagram;
-            document.getElementById('contactInstaLink').textContent = '@' + siteData.instagram;
-            document.getElementById('socialInsta').href = 'https://instagram.com/' + siteData.instagram;
+    // ========== LOAD SITE ==========
+    function loadSite() {
+      // Logo
+      const parts = (siteData.siteName || '').split(' ');
+      const logoHtml = parts[0] + (parts[1] ? ' <span>' + parts.slice(1).join(' ') + '</span>' : '');
+      document.querySelectorAll('.logo').forEach(function(el) { el.innerHTML = logoHtml; });
 
-            // CTA section
-            var ctaTitleEl = document.querySelector('.contato-section h2');
-            var ctaSubEl = document.querySelector('.contato-section p');
-            if (ctaTitleEl && siteData.ctaTitle) ctaTitleEl.textContent = siteData.ctaTitle;
-            if (ctaSubEl && siteData.ctaSubtitle) ctaSubEl.textContent = siteData.ctaSubtitle;
+      // Hero + Sobre
+      document.getElementById('heroTitle').textContent = siteData.heroTitle || defaultData.heroTitle;
+      document.getElementById('heroSubtitle').textContent = siteData.heroSubtitle || defaultData.heroSubtitle;
 
-            // Footer text
-            var footerP = document.querySelector('.footer-brand p');
-            if (footerP && siteData.footerText) footerP.textContent = siteData.footerText;
+      document.getElementById('aboutImage').src = siteData.aboutImage || defaultData.aboutImage;
+      document.getElementById('aboutText').innerHTML = (siteData.aboutText || '')
+        .split('\n')
+        .filter(function(p) { return p.trim(); })
+        .map(function(p) { return '<p>' + p + '</p>'; })
+        .join('');
 
-            // Footer copyright year with site name
-            var footerBottom = document.querySelector('.footer-bottom p');
-            if (footerBottom) footerBottom.innerHTML = '&copy; 2026 ' + siteData.siteName + ' &mdash; Todos os direitos reservados';
+      // Galeria + Serviços
+      loadGallery();
+      loadServices();
 
-            // Service detail pages
-            loadServiceDetailPages();
+      // Botões da seção "Vamos Conversar"
+      document.getElementById('contactLinks').innerHTML =
+        '<a href="https://wa.me/' + siteData.whatsapp + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
+        '<a href="https://instagram.com/' + siteData.instagram + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>' +
+        '<a href="mailto:' + siteData.email + '" class="contato-btn"><i class="fa-regular fa-envelope"></i> E-mail</a>' +
+        '<a href="#" class="contato-btn" onclick="navigateTo(\\'agendamento\\'); return false;"><i class="fa-regular fa-calendar"></i> Agendar</a>';
 
-            // Colors
-            document.documentElement.style.setProperty('--cor-principal', siteData.colors.primary);
-            document.documentElement.style.setProperty('--cor-secundaria', siteData.colors.secondary);
-            document.documentElement.style.setProperty('--cor-destaque', siteData.colors.accent);
-        }
+      // Contato page links
+      document.getElementById('contactWhatsappLink').href = 'https://wa.me/' + siteData.whatsapp;
+      document.getElementById('contactWhatsappLink').textContent = formatPhone(siteData.whatsapp);
 
-        function loadServiceDetailPages() {
-            if (!siteData.serviceDetails) return;
-            ['partos', 'gestante', 'familia', 'especiais'].forEach(function(id) {
-                var page = document.getElementById('page-service-' + id);
-                if (!page) return;
-                var details = siteData.serviceDetails[id];
-                if (!details) return;
+      document.getElementById('contactEmailLink').href = 'mailto:' + siteData.email;
+      document.getElementById('contactEmailLink').textContent = siteData.email;
 
-                // Hero title and subtitle
-                var heroH1 = page.querySelector('.service-detail-hero-content h1');
-                var heroP = page.querySelector('.service-detail-hero-content p');
-                if (heroH1 && details.title) heroH1.textContent = details.title;
-                if (heroP && details.subtitle) heroP.textContent = details.subtitle;
+      document.getElementById('contactInstaLink').href = 'https://instagram.com/' + siteData.instagram;
+      document.getElementById('contactInstaLink').textContent = '@' + siteData.instagram;
 
-                // Content title and text
-                var contentH2 = page.querySelector('.service-detail-content h2');
-                if (contentH2 && details.title) contentH2.textContent = details.title;
+      document.getElementById('socialInsta').href = 'https://instagram.com/' + siteData.instagram;
 
-                var contentSection = page.querySelector('.service-detail-content');
-                if (contentSection && details.text) {
-                    // Remove existing <p> tags after the h2 and before features
-                    var paragraphs = contentSection.querySelectorAll('p');
-                    paragraphs.forEach(function(p) { p.remove(); });
+      // CTA section
+      const ctaTitleEl = document.querySelector('.contato-section h2');
+      const ctaSubEl = document.querySelector('.contato-section p');
+      if (ctaTitleEl) ctaTitleEl.textContent = siteData.ctaTitle || defaultData.ctaTitle;
+      if (ctaSubEl) ctaSubEl.textContent = siteData.ctaSubtitle || defaultData.ctaSubtitle;
 
-                    // Insert new paragraphs after h2
-                    var h2 = contentSection.querySelector('h2');
-                    var features = contentSection.querySelector('.service-features');
-                    details.text.split('\n').filter(function(t) { return t.trim(); }).reverse().forEach(function(txt) {
-                        var p = document.createElement('p');
-                        p.textContent = txt;
-                        if (features) {
-                            contentSection.insertBefore(p, features);
-                        } else {
-                            h2.insertAdjacentElement('afterend', p);
-                        }
-                    });
-                }
+      // Footer text
+      const footerP = document.querySelector('.footer-brand p');
+      if (footerP) footerP.textContent = siteData.footerText || defaultData.footerText;
 
-                // Update features if provided
-                if (details.features) {
-                    var featuresEl = page.querySelector('.service-features');
-                    if (featuresEl) {
-                        var items = details.features.split('||');
-                        featuresEl.innerHTML = items.map(function(item) {
-                            var parts = item.split('|');
-                            return '<div class="service-feature">' +
-                                '<i class="fa-solid fa-check"></i>' +
-                                '<div><h4>' + (parts[0] || '') + '</h4><p>' + (parts[1] || '') + '</p></div>' +
-                            '</div>';
-                        }).join('');
-                    }
-                }
+      // Copyright
+      const yearEl = document.getElementById('footerYear');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+      const copyEl = document.getElementById('footerCopyright');
+      if (copyEl) copyEl.innerHTML = '&copy; ' + new Date().getFullYear() + ' ' + (siteData.siteName || defaultData.siteName) + ' &mdash; Todos os direitos reservados';
+
+      // Service detail pages text/features
+      loadServiceDetailPages();
+
+      // Colors
+      if (siteData.colors) {
+        document.documentElement.style.setProperty('--cor-principal', siteData.colors.primary || defaultData.colors.primary);
+        document.documentElement.style.setProperty('--cor-secundaria', siteData.colors.secondary || defaultData.colors.secondary);
+        document.documentElement.style.setProperty('--cor-destaque', siteData.colors.accent || defaultData.colors.accent);
+      }
+    }
+
+    function formatPhone(raw) {
+      if (!raw) return '';
+      const s = String(raw).replace(/\D/g, '');
+      // tenta formatar padrão BR: CC + DDD + 9xxxx + xxxx
+      const m = s.match(/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/);
+      if (!m) return '+' + s;
+      return '+' + m[1] + ' ' + m[2] + ' ' + m[3] + '-' + m[4];
+    }
+
+    function loadServiceDetailPages() {
+      if (!siteData.serviceDetails) return;
+
+      ['partos', 'gestante', 'familia', 'especiais'].forEach(function(id) {
+        const page = document.getElementById('page-service-' + id);
+        if (!page) return;
+
+        const details = siteData.serviceDetails[id];
+        if (!details) return;
+
+        const heroH1 = page.querySelector('.service-detail-hero-content h1');
+        const heroP = page.querySelector('.service-detail-hero-content p');
+        if (heroH1 && details.title) heroH1.textContent = details.title;
+        if (heroP && details.subtitle) heroP.textContent = details.subtitle;
+
+        const contentH2 = page.querySelector('.service-detail-content h2');
+        if (contentH2 && details.title) contentH2.textContent = details.title;
+
+        const contentSection = page.querySelector('.service-detail-content');
+        if (contentSection && details.text) {
+          // remove parágrafos existentes dentro do bloco (só os da descrição)
+          const paragraphs = Array.from(contentSection.querySelectorAll('p'));
+          paragraphs.forEach(function(p) { p.remove(); });
+
+          const h2 = contentSection.querySelector('h2');
+          const features = contentSection.querySelector('.service-features');
+
+          // inserir parágrafos (mantendo ordem)
+          details.text
+            .split('\n')
+            .filter(function(t) { return t.trim(); })
+            .forEach(function(txt) {
+              const p = document.createElement('p');
+              p.textContent = txt;
+              if (features) contentSection.insertBefore(p, features);
+              else h2.insertAdjacentElement('afterend', p);
             });
         }
 
-        function loadServices() {
-            var grid = document.getElementById('servicosGrid');
-            grid.innerHTML = servicesData.map(function(s) {
-                var img = (siteData.serviceImages && siteData.serviceImages[s.id]) || 'https://via.placeholder.com/800x600?text=' + s.title;
-                return '<div class="servico-card fade-in" onclick="navigateTo(\'service-' + s.id + '\')">' +
-                    '<div class="servico-card-image">' +
-                        '<img src="' + img + '" alt="' + s.title + '">' +
-                        '<div class="servico-icon-float"><i class="' + s.icon + '"></i></div>' +
-                    '</div>' +
-                    '<div class="servico-card-body">' +
-                        '<h3>' + s.title + '</h3>' +
-                        '<p>' + s.desc + '</p>' +
-                        '<span class="servico-card-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></span>' +
-                    '</div>' +
-                '</div>';
+        if (details.features) {
+          const featuresEl = page.querySelector('.service-features');
+          if (featuresEl) {
+            const items = details.features.split('||');
+            featuresEl.innerHTML = items.map(function(item) {
+              const parts = item.split('|');
+              return '<div class="service-feature">' +
+                '<i class="fa-solid fa-check"></i>' +
+                '<div><h4>' + (parts[0] || '') + '</h4><p>' + (parts[1] || '') + '</p></div>' +
+              '</div>';
             }).join('');
-
-            // Also update service detail page hero images
-            var detailImages = {
-                'page-service-partos': siteData.serviceImages.partos,
-                'page-service-gestante': siteData.serviceImages.gestante,
-                'page-service-familia': siteData.serviceImages.familia,
-                'page-service-especiais': siteData.serviceImages.especiais
-            };
-            Object.keys(detailImages).forEach(function(pageId) {
-                var page = document.getElementById(pageId);
-                if (page && detailImages[pageId]) {
-                    var heroImg = page.querySelector('.service-detail-hero img');
-                    if (heroImg) heroImg.src = detailImages[pageId];
-                }
-            });
+          }
         }
 
-        function loadGallery() {
-            var container = document.getElementById('galleryContainer');
-            var badge = document.getElementById('instaBadge');
-
-            if (siteData.galleryMode === 'instagram' && siteData.instagramUsername) {
-                badge.style.display = 'inline-flex';
-                badge.innerHTML = '<i class="fa-brands fa-instagram"></i> Fotos de @' + siteData.instagramUsername;
-                container.innerHTML =
-                    '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;">' +
-                        '<p style="margin-bottom: 30px; font-size: 1.05rem; font-weight: 300;">Veja meu trabalho completo no Instagram</p>' +
-                        '<a href="https://instagram.com/' + siteData.instagramUsername + '" class="btn-primary" target="_blank"><i class="fa-brands fa-instagram"></i> Ver Galeria Completa</a>' +
-                        '<div style="margin-top: 40px;"><iframe src="https://www.instagram.com/' + siteData.instagramUsername + '/embed" width="100%" height="600" frameborder="0" scrolling="no"></iframe></div>' +
-                    '</div>';
-            } else {
-                badge.style.display = 'none';
-                container.innerHTML = siteData.gallery.map(function(item) {
-                    return '<div class="galeria-item">' +
-                        '<img src="' + item.url + '" alt="' + item.title + '" loading="lazy">' +
-                        '<div class="galeria-overlay"><h3>' + item.title + '</h3></div>' +
-                    '</div>';
-                }).join('');
-            }
+        // imagem do hero por serviço
+        const heroImg = page.querySelector('.service-detail-hero img');
+        if (heroImg && siteData.serviceImages && siteData.serviceImages[id]) {
+          heroImg.src = siteData.serviceImages[id];
         }
+      });
+    }
 
-        // ========== LOGIN & ADMIN ==========
-        function openLogin() {
-            document.getElementById('loginOverlay').classList.add('active');
-        }
+    function loadServices() {
+      const grid = document.getElementById('servicosGrid');
+      grid.innerHTML = servicesData.map(function(s) {
+        const img = (siteData.serviceImages && siteData.serviceImages[s.id]) || ('https://via.placeholder.com/800x600?text=' + encodeURIComponent(s.title));
+        return '<div class="servico-card fade-in" onclick="navigateTo(\\'service-' + s.id + '\\')">' +
+          '<div class="servico-card-image">' +
+            '<img src="' + img + '" alt="' + s.title + '">' +
+            '<div class="servico-icon-float"><i class="' + s.icon + '"></i></div>' +
+          '</div>' +
+          '<div class="servico-card-body">' +
+            '<h3>' + s.title + '</h3>' +
+            '<p>' + s.desc + '</p>' +
+            '<span class="servico-card-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
 
-        function checkPassword() {
-            var pass = document.getElementById('adminPassword').value;
-            if (pass === siteData.password) {
-                document.getElementById('loginOverlay').classList.remove('active');
-                openAdmin();
-            } else {
-                alert('Senha incorreta!');
-            }
-        }
+    function loadGallery() {
+      const container = document.getElementById('galleryContainer');
+      const badge = document.getElementById('instaBadge');
 
-        function openAdmin() {
-            document.getElementById('editSiteName').value = siteData.siteName;
-            document.getElementById('editHeroTitle').value = siteData.heroTitle;
-            document.getElementById('editHeroSubtitle').value = siteData.heroSubtitle;
-            document.getElementById('editAboutImage').value = siteData.aboutImage;
-            document.getElementById('editAboutText').value = siteData.aboutText;
-            document.getElementById('editWhatsapp').value = siteData.whatsapp;
-            document.getElementById('editInstagram').value = siteData.instagram;
-            document.getElementById('editEmail').value = siteData.email;
-            document.getElementById('editColorPrimary').value = siteData.colors.primary;
-            document.getElementById('editColorPrimaryText').value = siteData.colors.primary;
-            document.getElementById('editColorSecondary').value = siteData.colors.secondary;
-            document.getElementById('editColorSecondaryText').value = siteData.colors.secondary;
-            document.getElementById('editColorAccent').value = siteData.colors.accent;
-            document.getElementById('editColorAccentText').value = siteData.colors.accent;
-            document.getElementById('galleryMode').value = siteData.galleryMode || 'manual';
-            document.getElementById('instagramUsername').value = siteData.instagramUsername || '';
+      if (siteData.galleryMode === 'instagram' && siteData.instagramUsername) {
+        badge.style.display = 'inline-flex';
+        badge.innerHTML = '<i class="fa-brands fa-instagram"></i> Fotos de @' + siteData.instagramUsername;
 
-            document.getElementById('editCtaTitle').value = siteData.ctaTitle || '';
-            document.getElementById('editCtaSubtitle').value = siteData.ctaSubtitle || '';
-            document.getElementById('editFooterText').value = siteData.footerText || '';
+        container.innerHTML =
+          '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;">' +
+            '<p style="margin-bottom: 30px; font-size: 1.05rem; font-weight: 300;">Veja meu trabalho completo no Instagram</p>' +
+            '<a href="https://instagram.com/' + siteData.instagramUsername + '" class="btn-primary" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Ver Galeria Completa</a>' +
+            '<div style="margin-top: 40px;"><iframe src="https://www.instagram.com/' + siteData.instagramUsername + '/embed" width="100%" height="600" frameborder="0" scrolling="no"></iframe></div>' +
+          '</div>';
+      } else {
+        badge.style.display = 'none';
 
-            toggleGalleryMode();
-            loadGalleryManager();
-            switchPhotoSection();
-            switchServiceText();
+        const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
+        container.innerHTML = items.map(function(item) {
+          return '<div class="galeria-item">' +
+            '<img src="' + item.url + '" alt="' + (item.title || 'Foto') + '" loading="lazy">' +
+            '<div class="galeria-overlay"><h3>' + (item.title || '') + '</h3></div>' +
+          '</div>';
+        }).join('');
+      }
+    }
 
-            ['Primary', 'Secondary', 'Accent'].forEach(function(color) {
-                document.getElementById('editColor' + color).addEventListener('input', function(e) {
-                    document.getElementById('editColor' + color + 'Text').value = e.target.value;
-                });
-            });
+    // ========== FORMS ==========
+    function handleContactForm(e) {
+      e.preventDefault();
+      alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
+      e.target.reset();
+    }
 
-            document.getElementById('adminPanel').classList.add('open');
-        }
+    function handleBookingForm(e) {
+      e.preventDefault();
+      alert('Solicitação de agendamento recebida! Entrarei em contato para confirmar.');
+      e.target.reset();
+    }
 
-        function closeAdmin() {
-            document.getElementById('adminPanel').classList.remove('open');
-        }
+    // ========== SCROLL EFFECTS ==========
+    function handleScroll() {
+      const header = document.getElementById('mainHeader');
+      if (header) header.classList.toggle('scrolled', window.scrollY > 50);
 
-        function toggleGalleryMode() {
-            var mode = document.getElementById('galleryMode').value;
-            document.getElementById('instagramSettings').style.display = mode === 'instagram' ? 'block' : 'none';
-            document.getElementById('manualSettings').style.display = mode === 'manual' ? 'block' : 'none';
-        }
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) el.classList.add('visible');
+      });
+    }
 
-        function loadGalleryManager() {
-            var container = document.getElementById('galleryManager');
-            container.innerHTML = siteData.gallery.map(function(item, index) {
-                var thumbHtml = item.url
-                    ? '<img src="' + item.url + '" alt="thumb" onerror="this.style.display=\'none\'">'
-                    : '<div class="thumb-placeholder"><i class="fa-solid fa-image"></i></div>';
-                return '<div class="gallery-item-admin">' +
-                    '<div class="gallery-item-thumb" onclick="triggerSingleUpload(' + index + ')" title="Clique para trocar a foto">' + thumbHtml + '</div>' +
-                    '<div class="gallery-item-fields">' +
-                        '<input type="text" placeholder="URL da imagem (ou faça upload)" value="' + (item.url.startsWith('data:') ? 'Foto local enviada' : item.url) + '" data-index="' + index + '" data-field="url" ' + (item.url.startsWith('data:') ? 'readonly style="background:#f0ede8;color:#999;"' : '') + '>' +
-                        '<input type="text" placeholder="Título" value="' + item.title + '" data-index="' + index + '" data-field="title">' +
-                    '</div>' +
-                    '<div class="gallery-item-actions">' +
-                        '<button class="btn-upload" onclick="triggerSingleUpload(' + index + ')" title="Enviar foto"><i class="fa-solid fa-upload"></i></button>' +
-                        '<button class="btn-remove" onclick="removeGalleryItem(' + index + ')"><i class="fa-solid fa-trash-can"></i></button>' +
-                    '</div>' +
-                '</div>';
-            }).join('');
+    // ========== INIT ==========
+    window.addEventListener('load', async function() {
+      siteData = await fetchSiteData();
+      loadSite();
+      initHeroSlideshow();
+      handleScroll();
+    });
 
-            container.querySelectorAll('input:not([readonly])').forEach(function(input) {
-                input.addEventListener('input', function(e) {
-                    var idx = parseInt(e.target.dataset.index);
-                    var field = e.target.dataset.field;
-                    if (field) siteData.gallery[idx][field] = e.target.value;
-                });
-            });
+    window.addEventListener('scroll', handleScroll);
+  </script>
 
-            updateStorageWarning();
-        }
+  <!-- Netlify Identity (necessário pro login do CMS) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-        // Single image upload for a specific gallery item
-        function triggerSingleUpload(index) {
-            var input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                var file = e.target.files[0];
-                if (!file) return;
-                resizeAndConvert(file, function(dataUrl) {
-                    siteData.gallery[index].url = dataUrl;
-                    if (!siteData.gallery[index].title) {
-                        siteData.gallery[index].title = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-                    }
-                    loadGalleryManager();
-                });
-            };
-            input.click();
-        }
-
-        // Bulk upload via dropzone
-        function handleBulkUpload(e) {
-            var files = Array.from(e.target.files);
-            if (!files.length) return;
-            var processed = 0;
-            files.forEach(function(file) {
-                resizeAndConvert(file, function(dataUrl) {
-                    siteData.gallery.push({
-                        url: dataUrl,
-                        title: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')
-                    });
-                    processed++;
-                    if (processed === files.length) {
-                        loadGalleryManager();
-                    }
-                });
-            });
-            e.target.value = '';
-        }
-
-        // Resize image to max 800px and convert to base64 JPEG
-        function resizeAndConvert(file, callback) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var img = new Image();
-                img.onload = function() {
-                    var canvas = document.createElement('canvas');
-                    var maxSize = 800;
-                    var w = img.width;
-                    var h = img.height;
-                    if (w > maxSize || h > maxSize) {
-                        if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
-                        else { w = Math.round(w * maxSize / h); h = maxSize; }
-                    }
-                    canvas.width = w;
-                    canvas.height = h;
-                    var ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
-                    callback(canvas.toDataURL('image/jpeg', 0.75));
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function updateStorageWarning() {
-            var warning = document.getElementById('storageWarning');
-            var hasBase64 = siteData.gallery.some(function(item) { return item.url.startsWith('data:'); });
-            warning.style.display = hasBase64 ? 'block' : 'none';
-        }
-
-        // Drag and drop for dropzone
-        (function() {
-            var dz = document.getElementById('uploadDropzone');
-            if (!dz) return;
-            ['dragenter', 'dragover'].forEach(function(evt) {
-                dz.addEventListener(evt, function(e) { e.preventDefault(); dz.classList.add('dragover'); });
-            });
-            ['dragleave', 'drop'].forEach(function(evt) {
-                dz.addEventListener(evt, function(e) { e.preventDefault(); dz.classList.remove('dragover'); });
-            });
-            dz.addEventListener('drop', function(e) {
-                var files = Array.from(e.dataTransfer.files).filter(function(f) { return f.type.startsWith('image/'); });
-                if (!files.length) return;
-                var processed = 0;
-                files.forEach(function(file) {
-                    resizeAndConvert(file, function(dataUrl) {
-                        siteData.gallery.push({
-                            url: dataUrl,
-                            title: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')
-                        });
-                        processed++;
-                        if (processed === files.length) loadGalleryManager();
-                    });
-                });
-            });
-        })();
-
-        // ========== SERVICE TEXT EDITOR ==========
-        var currentServiceTextSection = 'partos';
-
-        function switchServiceText() {
-            // Save previous section first
-            saveCurrentServiceText();
-
-            var section = document.getElementById('serviceTextSelect').value;
-            currentServiceTextSection = section;
-            var details = (siteData.serviceDetails && siteData.serviceDetails[section]) || {};
-            document.getElementById('editServiceTitle').value = details.title || '';
-            document.getElementById('editServiceSubtitle').value = details.subtitle || '';
-            document.getElementById('editServiceText').value = details.text || '';
-        }
-
-        function saveCurrentServiceText() {
-            var section = currentServiceTextSection;
-            if (!siteData.serviceDetails) siteData.serviceDetails = {};
-            if (!siteData.serviceDetails[section]) siteData.serviceDetails[section] = {};
-            var titleEl = document.getElementById('editServiceTitle');
-            var subtitleEl = document.getElementById('editServiceSubtitle');
-            var textEl = document.getElementById('editServiceText');
-            if (titleEl) siteData.serviceDetails[section].title = titleEl.value;
-            if (subtitleEl) siteData.serviceDetails[section].subtitle = subtitleEl.value;
-            if (textEl) siteData.serviceDetails[section].text = textEl.value;
-        }
-
-        // ========== UNIFIED PHOTO SECTION MANAGER ==========
-        var sectionHints = {
-            hero: 'Fotos exibidas no slideshow da tela inicial. Recomendado: horizontais, alta resolução.',
-            partos: 'Foto de capa da seção Partos (cards e página de detalhe).',
-            gestante: 'Foto de capa da seção Gestante (cards e página de detalhe).',
-            familia: 'Foto de capa da seção Família (cards e página de detalhe).',
-            especiais: 'Foto de capa da seção Especiais (cards e página de detalhe).'
-        };
-
-        function switchPhotoSection() {
-            var section = document.getElementById('photoSectionSelect').value;
-            document.getElementById('photoSectionHint').textContent = sectionHints[section] || '';
-
-            var addBtn = document.getElementById('sectionAddBtn');
-            var dropzone = document.getElementById('sectionDropzone');
-
-            if (section === 'hero') {
-                addBtn.style.display = 'block';
-                dropzone.style.display = 'block';
-                dropzone.querySelector('p:first-of-type').textContent = 'Arraste fotos ou clique para selecionar';
-            } else {
-                addBtn.style.display = 'none';
-                dropzone.style.display = 'block';
-                dropzone.querySelector('p:first-of-type').textContent = 'Clique para trocar a foto de capa';
-            }
-
-            loadSectionPhotos();
-        }
-
-        function loadSectionPhotos() {
-            var section = document.getElementById('photoSectionSelect').value;
-            var container = document.getElementById('sectionPhotoManager');
-
-            if (section === 'hero') {
-                // Multiple photos for hero
-                var images = siteData.heroImages || [];
-                container.innerHTML = images.map(function(url, index) {
-                    var isBase64 = url.startsWith('data:');
-                    var thumbHtml = url
-                        ? '<img src="' + url + '" alt="Hero ' + (index+1) + '">'
-                        : '<div class="thumb-placeholder"><i class="fa-solid fa-image"></i></div>';
-                    return '<div class="gallery-item-admin">' +
-                        '<div class="gallery-item-thumb" onclick="triggerHeroSingleUpload(' + index + ')">' + thumbHtml + '</div>' +
-                        '<div class="gallery-item-fields">' +
-                            '<input type="text" placeholder="URL da imagem" value="' + (isBase64 ? 'Foto local enviada' : url) + '" data-index="' + index + '" ' + (isBase64 ? 'readonly style="background:#f0ede8;color:#999;"' : '') + '>' +
-                        '</div>' +
-                        '<div class="gallery-item-actions">' +
-                            '<button class="btn-upload" onclick="triggerHeroSingleUpload(' + index + ')"><i class="fa-solid fa-upload"></i></button>' +
-                            '<button class="btn-remove" onclick="removeHeroPhoto(' + index + ')"><i class="fa-solid fa-trash-can"></i></button>' +
-                        '</div>' +
-                    '</div>';
-                }).join('');
-
-                container.querySelectorAll('input:not([readonly])').forEach(function(input) {
-                    input.addEventListener('change', function(e) {
-                        var idx = parseInt(e.target.dataset.index);
-                        siteData.heroImages[idx] = e.target.value;
-                    });
-                });
-            } else {
-                // Single photo for service
-                var url = (siteData.serviceImages && siteData.serviceImages[section]) || '';
-                var isBase64 = url.startsWith('data:');
-                var thumbHtml = url
-                    ? '<img src="' + url + '" alt="' + section + '" style="width:100%;height:120px;object-fit:cover;">'
-                    : '<div style="height:120px;display:flex;align-items:center;justify-content:center;background:#e8e4e0;color:#bbb;"><i class="fa-solid fa-image" style="font-size:2rem;"></i></div>';
-                container.innerHTML =
-                    '<div style="margin-bottom:10px;">' + thumbHtml + '</div>' +
-                    '<div class="form-group" style="margin-bottom:0;">' +
-                        '<input type="text" id="servicePhotoUrl" placeholder="URL da imagem" value="' + (isBase64 ? 'Foto local enviada' : url) + '" ' + (isBase64 ? 'readonly style="background:#f0ede8;color:#999;"' : '') + '>' +
-                    '</div>';
-
-                var urlInput = document.getElementById('servicePhotoUrl');
-                if (urlInput && !isBase64) {
-                    urlInput.addEventListener('change', function(e) {
-                        siteData.serviceImages[section] = e.target.value;
-                        loadSectionPhotos();
-                    });
-                }
-            }
-        }
-
-        function handleSectionUpload(e) {
-            var section = document.getElementById('photoSectionSelect').value;
-            var files = Array.from(e.target.files);
-            if (!files.length) return;
-
-            if (section === 'hero') {
-                var processed = 0;
-                files.forEach(function(file) {
-                    resizeAndConvert(file, function(dataUrl) {
-                        siteData.heroImages.push(dataUrl);
-                        processed++;
-                        if (processed === files.length) loadSectionPhotos();
-                    });
-                });
-            } else {
-                // Single photo for service — use only first file
-                resizeAndConvert(files[0], function(dataUrl) {
-                    siteData.serviceImages[section] = dataUrl;
-                    loadSectionPhotos();
-                });
-            }
-            e.target.value = '';
-        }
-
-        function triggerHeroSingleUpload(index) {
-            var input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                var file = e.target.files[0];
-                if (!file) return;
-                resizeAndConvert(file, function(dataUrl) {
-                    siteData.heroImages[index] = dataUrl;
-                    loadSectionPhotos();
-                });
-            };
-            input.click();
-        }
-
-        function removeHeroPhoto(index) {
-            if (confirm('Remover esta foto do hero?')) {
-                siteData.heroImages.splice(index, 1);
-                loadSectionPhotos();
-            }
-        }
-
-        function addSectionPhoto() {
-            var section = document.getElementById('photoSectionSelect').value;
-            if (section === 'hero') {
-                siteData.heroImages.push('');
-                loadSectionPhotos();
-            }
-        }
-
-        // Init dropzone drag-and-drop for section manager
-        (function() {
-            var dz = document.getElementById('sectionDropzone');
-            if (!dz) return;
-            ['dragenter', 'dragover'].forEach(function(evt) {
-                dz.addEventListener(evt, function(e) { e.preventDefault(); dz.classList.add('dragover'); });
-            });
-            ['dragleave', 'drop'].forEach(function(evt) {
-                dz.addEventListener(evt, function(e) { e.preventDefault(); dz.classList.remove('dragover'); });
-            });
-            dz.addEventListener('drop', function(e) {
-                var files = Array.from(e.dataTransfer.files).filter(function(f) { return f.type.startsWith('image/'); });
-                if (!files.length) return;
-                var section = document.getElementById('photoSectionSelect').value;
-                if (section === 'hero') {
-                    var processed = 0;
-                    files.forEach(function(file) {
-                        resizeAndConvert(file, function(dataUrl) {
-                            siteData.heroImages.push(dataUrl);
-                            processed++;
-                            if (processed === files.length) loadSectionPhotos();
-                        });
-                    });
-                } else {
-                    resizeAndConvert(files[0], function(dataUrl) {
-                        siteData.serviceImages[section] = dataUrl;
-                        loadSectionPhotos();
-                    });
-                }
-            });
-        })();
-
-        function addGalleryItem() {
-            siteData.gallery.push({url: '', title: ''});
-            loadGalleryManager();
-        }
-
-        function removeGalleryItem(index) {
-            if (confirm('Remover esta foto?')) {
-                siteData.gallery.splice(index, 1);
-                loadGalleryManager();
-            }
-        }
-
-        function saveAll() {
-            siteData.siteName = document.getElementById('editSiteName').value;
-            siteData.heroTitle = document.getElementById('editHeroTitle').value;
-            siteData.heroSubtitle = document.getElementById('editHeroSubtitle').value;
-            siteData.aboutImage = document.getElementById('editAboutImage').value;
-            siteData.aboutText = document.getElementById('editAboutText').value;
-            siteData.whatsapp = document.getElementById('editWhatsapp').value;
-            siteData.instagram = document.getElementById('editInstagram').value;
-            siteData.email = document.getElementById('editEmail').value;
-            siteData.colors.primary = document.getElementById('editColorPrimary').value;
-            siteData.colors.secondary = document.getElementById('editColorSecondary').value;
-            siteData.colors.accent = document.getElementById('editColorAccent').value;
-            siteData.galleryMode = document.getElementById('galleryMode').value;
-            siteData.instagramUsername = document.getElementById('instagramUsername').value;
-
-            var newPass = document.getElementById('editPassword').value;
-            if (newPass) siteData.password = newPass;
-
-            siteData.ctaTitle = document.getElementById('editCtaTitle').value;
-            siteData.ctaSubtitle = document.getElementById('editCtaSubtitle').value;
-            siteData.footerText = document.getElementById('editFooterText').value;
-
-            // Save current service text edits
-            saveCurrentServiceText();
-
-            // heroImages and serviceImages are already updated in-place by the photo manager
-
-            localStorage.setItem('portfolioData', JSON.stringify(siteData));
-            loadSite();
-            clearInterval(slideInterval);
-            currentSlide = 0;
-            initHeroSlideshow();
-            alert('Salvo com sucesso!');
-            closeAdmin();
-        }
-
-        // ========== FORMS ==========
-        function handleContactForm(e) {
-            e.preventDefault();
-            alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
-            e.target.reset();
-        }
-
-        function handleBookingForm(e) {
-            e.preventDefault();
-            alert('Solicitação de agendamento recebida! Entrarei em contato para confirmar.');
-            e.target.reset();
-        }
-
-        // ========== SCROLL EFFECTS ==========
-        function handleScroll() {
-            var header = document.getElementById('mainHeader');
-            if (header) header.classList.toggle('scrolled', window.scrollY > 50);
-
-            document.querySelectorAll('.fade-in').forEach(function(el) {
-                var rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.85) {
-                    el.classList.add('visible');
-                }
-            });
-        }
-
-        document.getElementById('loginOverlay').addEventListener('click', function(e) {
-            if (e.target === e.currentTarget) {
-                e.currentTarget.classList.remove('active');
-            }
-        });
-
-        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') checkPassword();
-        });
-
-        // ========== INIT ==========
-        window.addEventListener('load', function() {
-            loadSite();
-            initHeroSlideshow();
-            handleScroll();
-        });
-
-        window.addEventListener('scroll', handleScroll);
-    </script>
-<!-- Netlify Identity (necessário pro login do CMS) -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-<script>
-  // Se vier de invite/recovery e a pessoa caiu na home, manda pro /admin/
-  if (window.location.hash && (
+  <script>
+    // Se vier de invite/recovery e a pessoa caiu na home, manda pro /admin/
+    if (window.location.hash && (
       window.location.hash.includes('invite_token=') ||
       window.location.hash.includes('recovery_token=') ||
       window.location.hash.includes('confirmation_token=')
-  )) {
-    window.location.href = '/admin/' + window.location.hash;
-  }
+    )) {
+      window.location.href = '/admin/' + window.location.hash;
+    }
 
-  // Depois de logar, sempre manda pro /admin/
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
-
+    // Depois de logar, sempre manda pro /admin/
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
