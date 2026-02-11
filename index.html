@@ -437,6 +437,8 @@
       opacity: 0;
       transform: translateY(15px);
       transition: var(--transition);
+      text-align: center;
+      padding: 0 16px;
     }
 
     .galeria-item:hover .galeria-overlay h3 {
@@ -581,6 +583,7 @@
       z-index: 3;
       text-align: center;
       color: white;
+      padding: 0 20px;
     }
 
     .service-detail-hero-content .service-icon-lg {
@@ -591,7 +594,7 @@
 
     .service-detail-hero-content h1 {
       font-family: var(--fonte-titulo);
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 5vw, 4rem);
       font-weight: 300;
       letter-spacing: 5px;
       text-transform: uppercase;
@@ -719,6 +722,88 @@
     }
 
     .back-link:hover { gap: 12px; }
+
+    /* ==================== STORY PAGE ==================== */
+    .story-page { padding-top: 80px; }
+
+    .story-hero {
+      height: 60vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+    }
+
+    .story-hero img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.95;
+    }
+
+    .story-hero .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
+      z-index: 2;
+    }
+
+    .story-hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: white;
+      padding: 0 20px;
+      max-width: 900px;
+    }
+
+    .story-hero-content h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .story-hero-content p {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      opacity: 0.85;
+    }
+
+    .story-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 50px;
+    }
+
+    .story-content p {
+      font-size: 1.05rem;
+      line-height: 2;
+      font-weight: 300;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .story-gallery {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .story-gallery img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      background: #f0f0f0;
+    }
 
     /* ==================== CONTATO PAGE ==================== */
     .contato-page { padding-top: 80px; }
@@ -1102,6 +1187,7 @@
       .servicos-grid { grid-template-columns: repeat(2, 1fr); }
       .service-features { grid-template-columns: 1fr; }
       .footer-content { grid-template-columns: 1fr; gap: 30px; }
+      .story-gallery { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
@@ -1129,6 +1215,8 @@
       .form-row, .date-grid { grid-template-columns: 1fr; }
       .hero-indicators { display: none; }
       .hero-scroll { display: none; }
+      .story-content { padding: 80px 24px; }
+      .story-gallery { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -1224,6 +1312,39 @@
       <p>Entre em contato e vamos criar algo lindo juntas</p>
       <div class="contato-links" id="contactLinks"></div>
     </section>
+  </div>
+
+  <!-- ==================== STORY PAGE ==================== -->
+  <div class="page" id="page-story">
+    <div class="story-page">
+      <div class="story-hero">
+        <img id="storyHeroImage" src="" alt="História">
+        <div class="hero-overlay"></div>
+        <div class="story-hero-content">
+          <h1 id="storyHeroTitle">História</h1>
+          <p id="storyHeroSubtitle" style="display:none;"></p>
+        </div>
+      </div>
+
+      <div class="story-content">
+        <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+
+        <h2 id="storyTitle" style="display:none;"></h2>
+        <div id="storyText"></div>
+
+        <div class="story-gallery" id="storyGallery" style="display:none;"></div>
+
+        <div class="service-cta" style="margin-top: 70px;">
+          <h3 id="storyCtaTitle">Vamos conversar?</h3>
+          <p id="storyCtaSubtitle">Se você gostou dessa história, me chama no WhatsApp.</p>
+          <a href="#" class="btn-primary" id="storyCtaWhatsapp" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ==================== SERVICE DETAIL PAGES ==================== -->
@@ -1648,38 +1769,7 @@
       </div>
     </div>
   </div>
-<!-- ==================== STORY PAGE (GENÉRICA) ==================== -->
-<div class="page" id="page-story">
-  <div class="service-detail">
-    <div class="service-detail-hero">
-      <img id="storyHeroImage" src="" alt="Story">
-      <div class="hero-overlay"></div>
-      <div class="service-detail-hero-content">
-        <h1 id="storyHeroTitle">História</h1>
-        <p id="storyHeroSubtitle"></p>
-      </div>
-    </div>
 
-    <div class="service-detail-content">
-      <a href="#" class="back-link" onclick="navigateTo('home'); return false;">
-        <i class="fa-solid fa-arrow-left"></i> Voltar
-      </a>
-
-      <h2 id="storyPageTitle">História</h2>
-      <div id="storyPageText"></div>
-
-      <div class="section-header" style="margin-top:60px;">
-        <h2 style="font-size:1.6rem;">Mais fotos</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="galeria-grid" id="storyGallery"></div>
-    </div>
-  </div>
-</div>
-
-
-  
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
     <div class="footer-content">
@@ -1718,12 +1808,12 @@
       galleryMode: 'manual',
       instagramUsername: '',
       gallery: [
-        {url: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800', title: 'Parto \u00b7 João'},
-        {url: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800', title: 'Parto \u00b7 Maria'},
-        {url: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800', title: 'Gestante \u00b7 Ana'},
-        {url: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800', title: 'Família \u00b7 Silva'},
-        {url: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800', title: 'Parto \u00b7 Pedro'},
-        {url: 'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800', title: 'Parto \u00b7 Laura'}
+        {url: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800', title: 'Parto \u00b7 João', story: '', storyTitle: '', storyText: '', storyImages: []},
+        {url: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800', title: 'Parto \u00b7 Maria', story: '', storyTitle: '', storyText: '', storyImages: []},
+        {url: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800', title: 'Gestante \u00b7 Ana', story: '', storyTitle: '', storyText: '', storyImages: []},
+        {url: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800', title: 'Família \u00b7 Silva', story: '', storyTitle: '', storyText: '', storyImages: []},
+        {url: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800', title: 'Parto \u00b7 Pedro', story: '', storyTitle: '', storyText: '', storyImages: []},
+        {url: 'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800', title: 'Parto \u00b7 Laura', story: '', storyTitle: '', storyText: '', storyImages: []}
       ],
       whatsapp: '5511999999999',
       instagram: 'kellyalmeidafoto',
@@ -1775,6 +1865,7 @@
 
     // Estado
     let siteData = defaultData;
+    let currentStory = null;
 
     // Serviços (cards)
     const servicesData = [
@@ -1787,6 +1878,23 @@
     // Slideshow
     let currentSlide = 0;
     let slideInterval;
+
+    // ✅ Normaliza caminhos locais vindos do CMS
+    function normalizeImagePath(p) {
+      if (!p) return '';
+      if (typeof p !== 'string') return '';
+      if (p.startsWith('http://') || p.startsWith('https://')) return p;
+      // se vier "assets/uploads/..." ou "/assets/uploads/..."
+      return p.startsWith('/') ? p : '/' + p;
+    }
+
+    // ✅ Aceita string OU objeto {image:"..."} (pra não quebrar quando o CMS salva como objeto)
+    function getImageValue(img) {
+      if (!img) return '';
+      if (typeof img === 'string') return normalizeImagePath(img);
+      if (typeof img === 'object' && img.image) return normalizeImagePath(img.image);
+      return '';
+    }
 
     // ✅ Carrega dados do CMS (Netlify CMS salva em /data/site.json)
     async function fetchSiteData() {
@@ -1819,7 +1927,7 @@
 
       container.innerHTML = shuffled.map((src, i) =>
         '<div class="hero-slide ' + (i === 0 ? 'active' : '') + '">' +
-          '<img src="' + src + '" alt="Portfolio ' + (i+1) + '">' +
+          '<img src="' + getImageValue(src) + '" alt="Portfolio ' + (i+1) + '">' +
         '</div>'
       ).join('');
 
@@ -1870,6 +1978,12 @@
       if (target) target.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       document.getElementById('mainMenu').classList.remove('open');
+
+      // ✅ se entrar na página de story sem ter story carregada, tenta ler do hash
+      if (pageId === 'story') {
+        const slug = getStorySlugFromHash();
+        if (slug) openStoryBySlug(slug);
+      }
     }
 
     function scrollToSection(sectionId) {
@@ -1885,6 +1999,126 @@
       document.getElementById('mainMenu').classList.toggle('open');
     }
 
+    // ========== STORIES ==========
+    function safeSlug(s) {
+      if (!s) return '';
+      return String(s)
+        .toLowerCase()
+        .trim()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function getStorySlugFromHash() {
+      // aceita: #story=um-dia  |  #/story/um-dia  |  #story/um-dia
+      const h = String(window.location.hash || '');
+      if (!h) return '';
+      if (h.startsWith('#story=')) return decodeURIComponent(h.replace('#story=', ''));
+      if (h.startsWith('#/story/')) return decodeURIComponent(h.replace('#/story/', ''));
+      if (h.startsWith('#story/')) return decodeURIComponent(h.replace('#story/', ''));
+      return '';
+    }
+
+    function setStoryHash(slug) {
+      if (!slug) return;
+      window.location.hash = '#/story/' + encodeURIComponent(slug);
+    }
+
+    function findStoryItemBySlug(slug) {
+      const list = Array.isArray(siteData.gallery) ? siteData.gallery : [];
+      const normalized = safeSlug(slug);
+      for (let i = 0; i < list.length; i++) {
+        const it = list[i] || {};
+        const s = safeSlug(it.story || '');
+        if (s && s === normalized) return it;
+      }
+      return null;
+    }
+
+    function openStory(item) {
+      if (!item) return;
+
+      // slug obrigatório pra navegar
+      const slug = safeSlug(item.story || '');
+      if (!slug) return;
+
+      currentStory = item;
+      setStoryHash(slug);
+      renderStoryPage(item);
+      navigateTo('story');
+    }
+
+    function openStoryBySlug(slug) {
+      const item = findStoryItemBySlug(slug);
+      if (!item) return;
+
+      currentStory = item;
+      renderStoryPage(item);
+    }
+
+    function renderStoryPage(item) {
+      const heroImgEl = document.getElementById('storyHeroImage');
+      const heroTitleEl = document.getElementById('storyHeroTitle');
+      const heroSubEl = document.getElementById('storyHeroSubtitle');
+      const storyTextEl = document.getElementById('storyText');
+      const storyGalleryEl = document.getElementById('storyGallery');
+
+      const heroImg = getImageValue(item.url);
+      if (heroImgEl) heroImgEl.src = heroImg || getImageValue(siteData.aboutImage) || '';
+
+      // título da página: storyTitle > title > "História"
+      const title = (item.storyTitle && String(item.storyTitle).trim())
+        ? item.storyTitle
+        : ((item.title && String(item.title).trim()) ? item.title : 'História');
+
+      if (heroTitleEl) heroTitleEl.textContent = title;
+
+      // subtitle opcional (se quiser usar no futuro)
+      if (heroSubEl) {
+        heroSubEl.style.display = 'none';
+        heroSubEl.textContent = '';
+      }
+
+      // texto longo com parágrafos
+      const txt = (item.storyText && String(item.storyText).trim()) ? String(item.storyText) : '';
+      if (storyTextEl) {
+        if (!txt) {
+          storyTextEl.innerHTML = '<p style="color:#999;">(Sem texto ainda)</p>';
+        } else {
+          storyTextEl.innerHTML = txt
+            .split('\n')
+            .map(function(p){ return p.trim(); })
+            .filter(function(p){ return p; })
+            .map(function(p){ return '<p>' + p.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>'; })
+            .join('');
+        }
+      }
+
+      // galeria extra da história
+      const imgs = Array.isArray(item.storyImages) ? item.storyImages : [];
+      const valid = imgs
+        .map(function(x){ return getImageValue(x); })
+        .filter(function(src){ return !!src; });
+
+      if (storyGalleryEl) {
+        if (!valid.length) {
+          storyGalleryEl.style.display = 'none';
+          storyGalleryEl.innerHTML = '';
+        } else {
+          storyGalleryEl.style.display = 'grid';
+          storyGalleryEl.innerHTML = valid.map(function(src){
+            return '<img src="' + src + '" alt="Foto da história" loading="lazy">';
+          }).join('');
+        }
+      }
+
+      // CTA whatsapp dentro da story
+      const wa = (siteData.whatsapp || '').toString().replace(/\D/g,'');
+      const waLink = document.getElementById('storyCtaWhatsapp');
+      if (waLink) waLink.href = 'https://wa.me/' + wa;
+    }
+
     // ========== LOAD SITE ==========
     function loadSite() {
       // Logo
@@ -1896,106 +2130,35 @@
       document.getElementById('heroTitle').textContent = siteData.heroTitle || defaultData.heroTitle;
       document.getElementById('heroSubtitle').textContent = siteData.heroSubtitle || defaultData.heroSubtitle;
 
-      document.getElementById('aboutImage').src = siteData.aboutImage || defaultData.aboutImage;
+      document.getElementById('aboutImage').src = getImageValue(siteData.aboutImage) || defaultData.aboutImage;
       document.getElementById('aboutText').innerHTML = (siteData.aboutText || '')
         .split('\n')
         .filter(function(p) { return p.trim(); })
-        .map(function(p) { return '<p>' + p + '</p>'; })
+        .map(function(p) { return '<p>' + p.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>'; })
         .join('');
 
       // Galeria + Serviços
-   function loadGallery() {
-  const container = document.getElementById('galleryContainer');
-  const badge = document.getElementById('instaBadge');
+      loadGallery();
+      loadServices();
 
-  if (siteData.galleryMode === 'instagram' && siteData.instagramUsername) {
-    badge.style.display = 'inline-flex';
-    badge.innerHTML = '<i class="fa-brands fa-instagram"></i> Fotos de @' + siteData.instagramUsername;
+      // Botões da seção "Vamos Conversar"
+      document.getElementById('contactLinks').innerHTML =
+        '<a href="https://wa.me/' + String(siteData.whatsapp || '').replace(/\\D/g,'') + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
+        '<a href="https://instagram.com/' + (siteData.instagram || '') + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>' +
+        '<a href="mailto:' + (siteData.email || '') + '" class="contato-btn"><i class="fa-regular fa-envelope"></i> E-mail</a>' +
+        '<a href="#" class="contato-btn" onclick="navigateTo(\'agendamento\'); return false;"><i class="fa-regular fa-calendar"></i> Agendar</a>';
 
-    container.innerHTML =
-      '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;">' +
-        '<p style="margin-bottom: 30px; font-size: 1.05rem; font-weight: 300;">Veja meu trabalho completo no Instagram</p>' +
-        '<a href="https://instagram.com/' + siteData.instagramUsername + '" class="btn-primary" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Ver Galeria Completa</a>' +
-        '<div style="margin-top: 40px;"><iframe src="https://www.instagram.com/' + siteData.instagramUsername + '/embed" width="100%" height="600" frameborder="0" scrolling="no"></iframe></div>' +
-      '</div>';
-    return;
-  }
+      // Contato page links
+      document.getElementById('contactWhatsappLink').href = 'https://wa.me/' + String(siteData.whatsapp || '').replace(/\D/g,'');
+      document.getElementById('contactWhatsappLink').textContent = formatPhone(siteData.whatsapp);
 
-  badge.style.display = 'none';
+      document.getElementById('contactEmailLink').href = 'mailto:' + siteData.email;
+      document.getElementById('contactEmailLink').textContent = siteData.email;
 
-  const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
+      document.getElementById('contactInstaLink').href = 'https://instagram.com/' + siteData.instagram;
+      document.getElementById('contactInstaLink').textContent = '@' + siteData.instagram;
 
-  container.innerHTML = items.map(function(item, idx) {
-    const hasStory = !!(item.story || item.storyTitle || item.storyText || (item.storyImages && item.storyImages.length));
-    const click = hasStory ? ' onclick="openStory(' + idx + '); return false;"' : '';
-
-    // quando não tiver story, não vira link (só imagem)
-    const wrapperStart = hasStory ? '<a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"' + click + '>' : '';
-    const wrapperEnd = hasStory ? '</a>' : '';
-
-    return '<div class="galeria-item">' +
-      wrapperStart +
-        '<img src="' + item.url + '" alt="' + (item.title || 'Foto') + '" loading="lazy">' +
-        '<div class="galeria-overlay"><h3>' + (item.title || '') + '</h3></div>' +
-      wrapperEnd +
-    '</div>';
-  }).join('');
-}
-
-function normalizeImagePath(p) {
-  if (!p) return '';
-  // se vier "assets/uploads/xxx.jpg", força "/assets/uploads/xxx.jpg"
-  if (p.startsWith('assets/')) return '/' + p;
-  return p;
-}
-
-function openStory(index) {
-  const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
-  const item = items[index];
-  if (!item) return;
-
-  // Hero
-  const heroImg = document.getElementById('storyHeroImage');
-  const heroTitle = document.getElementById('storyHeroTitle');
-  const heroSub = document.getElementById('storyHeroSubtitle');
-
-  const pageTitle = document.getElementById('storyPageTitle');
-  const pageText = document.getElementById('storyPageText');
-  const storyGallery = document.getElementById('storyGallery');
-
-  const title = item.storyTitle || item.title || 'História';
-  const subtitle = item.story ? ('/' + item.story) : '';
-
-  if (heroImg) heroImg.src = normalizeImagePath(item.url);
-  if (heroTitle) heroTitle.textContent = title;
-  if (heroSub) heroSub.textContent = subtitle;
-
-  if (pageTitle) pageTitle.textContent = title;
-
-  if (pageText) {
-    const txt = item.storyText || '';
-    pageText.innerHTML = txt
-      .split('\n')
-      .filter(t => t.trim())
-      .map(t => '<p>' + t + '</p>')
-      .join('') || '<p style="color:#888; font-weight:300;">(Texto da história ainda não preenchido)</p>';
-  }
-
-  // galeria extra da história
-  const extra = Array.isArray(item.storyImages) ? item.storyImages : [];
-  if (storyGallery) {
-    storyGallery.innerHTML = extra.map(function(src) {
-      const s = (typeof src === 'string') ? src : (src && src.image ? src.image : '');
-      const finalSrc = normalizeImagePath(s);
-      if (!finalSrc) return '';
-      return '<div class="galeria-item">' +
-        '<img src="' + finalSrc + '" alt="' + title + '" loading="lazy">' +
-      '</div>';
-    }).join('') || '<div style="grid-column:1/-1; text-align:center; color:#999; font-weight:300;">(Sem fotos extras)</div>';
-  }
-
-  navigateTo('story');
-}
+      document.getElementById('socialInsta').href = 'https://instagram.com/' + siteData.instagram;
 
       // CTA section
       const ctaTitleEl = document.querySelector('.contato-section h2');
@@ -2022,12 +2185,18 @@ function openStory(index) {
         document.documentElement.style.setProperty('--cor-secundaria', siteData.colors.secondary || defaultData.colors.secondary);
         document.documentElement.style.setProperty('--cor-destaque', siteData.colors.accent || defaultData.colors.accent);
       }
+
+      // Se o hash já veio com story, abre direto
+      const slug = getStorySlugFromHash();
+      if (slug) {
+        openStoryBySlug(slug);
+        navigateTo('story');
+      }
     }
 
     function formatPhone(raw) {
       if (!raw) return '';
       const s = String(raw).replace(/\D/g, '');
-      // tenta formatar padrão BR: CC + DDD + 9xxxx + xxxx
       const m = s.match(/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/);
       if (!m) return '+' + s;
       return '+' + m[1] + ' ' + m[2] + ' ' + m[3] + '-' + m[4];
@@ -2053,14 +2222,12 @@ function openStory(index) {
 
         const contentSection = page.querySelector('.service-detail-content');
         if (contentSection && details.text) {
-          // remove parágrafos existentes dentro do bloco (só os da descrição)
           const paragraphs = Array.from(contentSection.querySelectorAll('p'));
           paragraphs.forEach(function(p) { p.remove(); });
 
           const h2 = contentSection.querySelector('h2');
           const features = contentSection.querySelector('.service-features');
 
-          // inserir parágrafos (mantendo ordem)
           details.text
             .split('\n')
             .filter(function(t) { return t.trim(); })
@@ -2086,10 +2253,10 @@ function openStory(index) {
           }
         }
 
-        // imagem do hero por serviço
         const heroImg = page.querySelector('.service-detail-hero img');
-        if (heroImg && siteData.serviceImages && siteData.serviceImages[id]) {
-          heroImg.src = siteData.serviceImages[id];
+        const src = siteData.serviceImages && siteData.serviceImages[id];
+        if (heroImg && src) {
+          heroImg.src = getImageValue(src);
         }
       });
     }
@@ -2097,10 +2264,11 @@ function openStory(index) {
     function loadServices() {
       const grid = document.getElementById('servicosGrid');
       grid.innerHTML = servicesData.map(function(s) {
-        const img = (siteData.serviceImages && siteData.serviceImages[s.id]) || ('https://via.placeholder.com/800x600?text=' + encodeURIComponent(s.title));
-return '<div class="servico-card fade-in" onclick="navigateTo(\'service-' + s.id + '\'); return false;">' +
+        const img = (siteData.serviceImages && siteData.serviceImages[s.id]) ? getImageValue(siteData.serviceImages[s.id]) : '';
+        const fallback = 'https://via.placeholder.com/800x600?text=' + encodeURIComponent(s.title);
+        return '<div class="servico-card fade-in" onclick="navigateTo(\'service-' + s.id + '\')">' +
           '<div class="servico-card-image">' +
-            '<img src="' + img + '" alt="' + s.title + '">' +
+            '<img src="' + (img || fallback) + '" alt="' + s.title + '">' +
             '<div class="servico-icon-float"><i class="' + s.icon + '"></i></div>' +
           '</div>' +
           '<div class="servico-card-body">' +
@@ -2131,12 +2299,25 @@ return '<div class="servico-card fade-in" onclick="navigateTo(\'service-' + s.id
 
         const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
         container.innerHTML = items.map(function(item) {
-          return '<div class="galeria-item">' +
-            '<img src="' + item.url + '" alt="' + (item.title || 'Foto') + '" loading="lazy">' +
-            '<div class="galeria-overlay"><h3>' + (item.title || '') + '</h3></div>' +
+          const img = getImageValue(item.url);
+          const hasStory = !!safeSlug(item.story || '');
+          const title = item.title || '';
+          const click = hasStory ? ' onclick="openStoryByIndex(' + items.indexOf(item) + ')"' : '';
+          const cursor = hasStory ? 'cursor:pointer;' : 'cursor:default;';
+          return '<div class="galeria-item" style="' + cursor + '"' + click + '>' +
+            '<img src="' + img + '" alt="' + (title || 'Foto') + '" loading="lazy">' +
+            '<div class="galeria-overlay"><h3>' + (title || '') + '</h3></div>' +
           '</div>';
         }).join('');
       }
+    }
+
+    // helper para onclick inline (sem serializar objeto)
+    function openStoryByIndex(i) {
+      const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
+      const item = items[i];
+      if (!item) return;
+      openStory(item);
     }
 
     // ========== FORMS ==========
@@ -2172,6 +2353,15 @@ return '<div class="servico-card fade-in" onclick="navigateTo(\'service-' + s.id
     });
 
     window.addEventListener('scroll', handleScroll);
+
+    // Se mudar o hash (ex: colou link direto), abre story
+    window.addEventListener('hashchange', function() {
+      const slug = getStorySlugFromHash();
+      if (slug) {
+        openStoryBySlug(slug);
+        navigateTo('story');
+      }
+    });
   </script>
 
   <!-- Netlify Identity (necessário pro login do CMS) -->
