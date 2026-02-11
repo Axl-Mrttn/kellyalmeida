@@ -32,8 +32,6 @@
       --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-
-
     /* ==================== HEADER ==================== */
     .header {
       position: fixed;
@@ -804,261 +802,6 @@
       background: #f0f0f0;
     }
 
-    /* ==================== CONTATO PAGE ==================== */
-    .contato-page { padding-top: 80px; }
-
-    .contato-hero {
-      height: 40vh;
-      min-height: 300px;
-      background: linear-gradient(135deg, var(--cor-principal) 0%, var(--cor-secundaria) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .contato-hero h1 {
-      font-family: var(--fonte-titulo);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      color: white;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-    }
-
-    .contato-hero p {
-      color: rgba(255,255,255,0.85);
-      margin-top: 15px;
-      font-weight: 300;
-      letter-spacing: 2px;
-    }
-
-    .contato-body {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 100px 50px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-    }
-
-    .contato-info h3 {
-      font-family: var(--fonte-titulo);
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--cor-destaque);
-      margin-bottom: 30px;
-      letter-spacing: 2px;
-    }
-
-    .contato-info-item {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 35px;
-    }
-
-    .contato-info-item .info-icon {
-      width: 45px; height: 45px;
-      background: var(--cor-clara);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--cor-destaque);
-      font-size: 1rem;
-    }
-
-    .contato-info-item h4 {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #aaa;
-      margin-bottom: 5px;
-      font-weight: 400;
-    }
-
-    .contato-info-item p {
-      font-weight: 300;
-      color: var(--cor-texto);
-    }
-
-    .contato-info-item a {
-      color: var(--cor-destaque);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .contato-info-item a:hover { color: var(--cor-escura); }
-
-    .contato-social {
-      display: flex;
-      gap: 15px;
-      margin-top: 40px;
-    }
-
-    .contato-social a {
-      width: 45px; height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #ddd;
-      color: var(--cor-destaque);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .contato-social a:hover {
-      background: var(--cor-destaque);
-      color: white;
-      border-color: var(--cor-destaque);
-    }
-
-    .contato-form h3 {
-      font-family: var(--fonte-titulo);
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--cor-destaque);
-      margin-bottom: 30px;
-      letter-spacing: 2px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .form-group { margin-bottom: 20px; }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #aaa;
-      font-weight: 400;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #e0e0e0;
-      background: white;
-      font-family: var(--fonte-corpo);
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--cor-texto);
-      transition: var(--transition);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--cor-destaque);
-    }
-
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    /* ==================== AGENDAMENTO PAGE ==================== */
-    .agendamento-page { padding-top: 80px; }
-
-    .agendamento-hero {
-      height: 40vh;
-      min-height: 300px;
-      background: linear-gradient(135deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .agendamento-hero h1 {
-      font-family: var(--fonte-titulo);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      color: white;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-    }
-
-    .agendamento-hero p {
-      color: rgba(255,255,255,0.85);
-      margin-top: 15px;
-      font-weight: 300;
-      letter-spacing: 2px;
-    }
-
-    .agendamento-body {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 100px 50px;
-    }
-
-    .agendamento-steps {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-bottom: 70px;
-    }
-
-    .agendamento-step { text-align: center; }
-
-    .agendamento-step .step-number {
-      width: 50px; height: 50px;
-      border: 1px solid var(--cor-secundaria);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
-      font-family: var(--fonte-titulo);
-      font-size: 1.3rem;
-      color: var(--cor-destaque);
-    }
-
-    .agendamento-step p {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #aaa;
-      font-weight: 400;
-    }
-
-    .agendamento-form-card {
-      background: white;
-      padding: 60px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .agendamento-form-card h3 {
-      font-family: var(--fonte-titulo);
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--cor-destaque);
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-    }
-
-    .agendamento-form-card > p {
-      color: #aaa;
-      font-weight: 300;
-      margin-bottom: 40px;
-      font-size: 0.95rem;
-    }
-
-    .date-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
     /* ==================== CONTATO SECTION (homepage) ==================== */
     .contato-section {
       padding: 140px 50px;
@@ -1181,6 +924,26 @@
       margin: 0 auto;
     }
 
+    .footer-signature {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-signature a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding-bottom: 1px;
+      transition: var(--transition);
+    }
+
+    .footer-signature a:hover {
+      color: white;
+      border-bottom-color: rgba(255,255,255,0.7);
+    }
+
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 1024px) {
       .servicos-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1208,10 +971,6 @@
       .servicos-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
       .galeria-grid { grid-template-columns: 1fr 1fr; }
       .galeria { padding: 80px 20px; }
-      .contato-body { grid-template-columns: 1fr; gap: 50px; }
-      .agendamento-steps { flex-direction: column; gap: 30px; }
-      .agendamento-form-card { padding: 30px; }
-      .form-row, .date-grid { grid-template-columns: 1fr; }
       .hero-indicators { display: none; }
       .hero-scroll { display: none; }
       .story-content { padding: 80px 24px; }
@@ -1236,13 +995,8 @@
         <li><a href="#" onclick="navigateTo('home'); return false;">Início</a></li>
         <li><a href="#" onclick="scrollToSection('sobre'); return false;">Sobre</a></li>
         <li><a href="#" onclick="scrollToSection('galeria'); return false;">Galeria</a></li>
-        <li>
-  <a href="#" onclick="scrollToSection('servicos'); return false;">
-    Serviços
-  </a>
-</li>
-        <li><a href="#" onclick="navigateTo('contato'); return false;">Contato</a></li>
-        <li><a href="#" onclick="navigateTo('agendamento'); return false;">Agendamento</a></li>
+        <li><a href="#" onclick="scrollToSection('servicos'); return false;">Serviços</a></li>
+        <li><a href="#" onclick="scrollToSection('contatoSection'); return false;">Contato</a></li>
       </ul>
     </nav>
   </header>
@@ -1404,9 +1158,9 @@
       </div>
       <div class="service-cta">
         <h3>Quer registrar esse momento?</h3>
-        <p>Agende uma conversa para conhecer melhor o meu trabalho</p>
-        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        <p>Me chama no WhatsApp e vamos conversar</p>
+        <a href="#" class="btn-primary" onclick="scrollToSection('contatoSection'); return false;">
+          <i class="fa-brands fa-whatsapp"></i> Vamos conversar
         </a>
       </div>
     </div>
@@ -1464,9 +1218,9 @@
       </div>
       <div class="service-cta">
         <h3>Vamos eternizar esse momento?</h3>
-        <p>O período ideal para o ensaio é entre a 28ª e 34ª semana</p>
-        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        <p>Me chama no WhatsApp e combinamos tudo</p>
+        <a href="#" class="btn-primary" onclick="scrollToSection('contatoSection'); return false;">
+          <i class="fa-brands fa-whatsapp"></i> Vamos conversar
         </a>
       </div>
     </div>
@@ -1524,9 +1278,9 @@
       </div>
       <div class="service-cta">
         <h3>Vamos registrar a sua família?</h3>
-        <p>Cada fase merece ser eternizada com carinho</p>
-        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        <p>Me chama no WhatsApp e alinhamos a sessão</p>
+        <a href="#" class="btn-primary" onclick="scrollToSection('contatoSection'); return false;">
+          <i class="fa-brands fa-whatsapp"></i> Vamos conversar
         </a>
       </div>
     </div>
@@ -1584,177 +1338,10 @@
       </div>
       <div class="service-cta">
         <h3>Tem um momento especial para registrar?</h3>
-        <p>Conte-me sobre o evento e criamos algo personalizado</p>
-        <a href="#" class="btn-primary" onclick="navigateTo('agendamento'); return false;">
-          <i class="fa-regular fa-calendar"></i> Agendar Sessão
+        <p>Me chama no WhatsApp e me conta a ideia</p>
+        <a href="#" class="btn-primary" onclick="scrollToSection('contatoSection'); return false;">
+          <i class="fa-brands fa-whatsapp"></i> Vamos conversar
         </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== CONTATO PAGE ==================== -->
-  <div class="page" id="page-contato">
-    <div class="contato-page">
-      <div class="contato-hero">
-        <div>
-          <h1>Contato</h1>
-          <p>Adoraria ouvir você</p>
-        </div>
-      </div>
-      <div class="contato-body">
-        <div class="contato-info">
-          <h3>Informações</h3>
-
-          <div class="contato-info-item">
-            <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
-            <div>
-              <h4>WhatsApp</h4>
-              <p><a href="#" id="contactWhatsappLink">+55 11 99999-9999</a></p>
-            </div>
-          </div>
-
-          <div class="contato-info-item">
-            <div class="info-icon"><i class="fa-regular fa-envelope"></i></div>
-            <div>
-              <h4>E-mail</h4>
-              <p><a href="#" id="contactEmailLink">contato@kellyfoto.com</a></p>
-            </div>
-          </div>
-
-          <div class="contato-info-item">
-            <div class="info-icon"><i class="fa-brands fa-instagram"></i></div>
-            <div>
-              <h4>Instagram</h4>
-              <p><a href="#" id="contactInstaLink" target="_blank">@kellyalmeidafoto</a></p>
-            </div>
-          </div>
-
-          <div class="contato-info-item">
-            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div>
-              <h4>Localização</h4>
-              <p>São Paulo, SP — Atendimento em toda a região</p>
-            </div>
-          </div>
-
-          <div class="contato-social">
-            <a href="#" id="socialInsta"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" id="socialFb"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" id="socialPin"><i class="fa-brands fa-pinterest-p"></i></a>
-          </div>
-        </div>
-
-        <div class="contato-form">
-          <h3>Envie uma mensagem</h3>
-          <form onsubmit="handleContactForm(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Nome</label>
-                <input type="text" placeholder="Seu nome" required>
-              </div>
-              <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" placeholder="seu@email.com" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Assunto</label>
-              <select>
-                <option value="">Selecione...</option>
-                <option>Fotografia de Parto</option>
-                <option>Ensaio Gestante</option>
-                <option>Ensaio de Família</option>
-                <option>Sessão Especial</option>
-                <option>Outro</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Mensagem</label>
-              <textarea placeholder="Conte um pouco sobre o que você precisa..." required></textarea>
-            </div>
-            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-              <i class="fa-regular fa-paper-plane"></i> Enviar Mensagem
-            </button>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== AGENDAMENTO PAGE ==================== -->
-  <div class="page" id="page-agendamento">
-    <div class="agendamento-page">
-      <div class="agendamento-hero">
-        <div>
-          <h1>Agendamento</h1>
-          <p>Escolha a melhor data para a sua sessão</p>
-        </div>
-      </div>
-
-        <div class="agendamento-form-card">
-          <h3>Agende sua Sessão</h3>
-          <p>Preencha os dados e entrarei em contato para confirmar</p>
-
-          <form onsubmit="handleBookingForm(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Nome completo</label>
-                <input type="text" placeholder="Seu nome" required>
-              </div>
-              <div class="form-group">
-                <label>Telefone / WhatsApp</label>
-                <input type="tel" placeholder="(11) 99999-9999" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>E-mail</label>
-              <input type="email" placeholder="seu@email.com" required>
-            </div>
-
-            <div class="form-group">
-              <label>Tipo de Sessão</label>
-              <select required>
-                <option value="">Selecione o serviço...</option>
-                <option>Fotografia de Parto</option>
-                <option>Ensaio Gestante</option>
-                <option>Ensaio de Família</option>
-                <option>Sessão Especial (Smash the Cake, Batizado, etc.)</option>
-              </select>
-            </div>
-
-            <div class="date-grid">
-              <div class="form-group">
-                <label>Data preferida</label>
-                <input type="date" required>
-              </div>
-              <div class="form-group">
-                <label>Horário preferido</label>
-                <select>
-                  <option>Manhã (8h - 12h)</option>
-                  <option>Tarde (13h - 17h)</option>
-                  <option>Fim de tarde (17h - 19h)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Semanas de gestação (se aplicável)</label>
-              <input type="text" placeholder="Ex: 30 semanas">
-            </div>
-
-            <div class="form-group">
-              <label>Observações</label>
-              <textarea placeholder="Algo mais que gostaria de compartilhar?"></textarea>
-            </div>
-
-            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-              <i class="fa-regular fa-calendar-check"></i> Solicitar Agendamento
-            </button>
-          </form>
-
-        </div>
       </div>
     </div>
   </div>
@@ -1769,8 +1356,7 @@
       <div class="footer-links">
         <h4>Navegação</h4>
         <a href="#" onclick="navigateTo('home'); return false;">Início</a>
-        <a href="#" onclick="navigateTo('contato'); return false;">Contato</a>
-        <a href="#" onclick="navigateTo('agendamento'); return false;">Agendamento</a>
+        <a href="#" onclick="scrollToSection('contatoSection'); return false;">Contato</a>
       </div>
       <div class="footer-links">
         <h4>Serviços</h4>
@@ -1782,6 +1368,9 @@
     </div>
     <div class="footer-bottom">
       <p id="footerCopyright">&copy; <span id="footerYear"></span> Kelly Almeida Fotografia &mdash; Todos os direitos reservados</p>
+      <div class="footer-signature">
+        Desenvolvido por <a href="https://axlfactory.com/" target="_blank" rel="noopener">Axl Factory</a>
+      </div>
     </div>
   </footer>
 
@@ -1873,11 +1462,9 @@
       if (!p) return '';
       if (typeof p !== 'string') return '';
       if (p.startsWith('http://') || p.startsWith('https://')) return p;
-      // se vier "assets/uploads/..." ou "/assets/uploads/..."
       return p.startsWith('/') ? p : '/' + p;
     }
 
-    // ✅ Aceita string OU objeto {image:"..."} (pra não quebrar quando o CMS salva como objeto)
     function getImageValue(img) {
       if (!img) return '';
       if (typeof img === 'string') return normalizeImagePath(img);
@@ -1885,7 +1472,6 @@
       return '';
     }
 
-    // ✅ Carrega dados do CMS (Netlify CMS salva em /data/site.json)
     async function fetchSiteData() {
       try {
         const res = await fetch('/data/site.json', { cache: 'no-store' });
@@ -1893,7 +1479,6 @@
 
         const json = await res.json();
 
-        // merge simples pra garantir que nada quebra se faltar campo
         return {
           ...defaultData,
           ...json,
@@ -1968,7 +1553,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       document.getElementById('mainMenu').classList.remove('open');
 
-      // ✅ se entrar na página de story sem ter story carregada, tenta ler do hash
       if (pageId === 'story') {
         const slug = getStorySlugFromHash();
         if (slug) openStoryBySlug(slug);
@@ -2000,7 +1584,6 @@
     }
 
     function getStorySlugFromHash() {
-      // aceita: #story=um-dia  |  #/story/um-dia  |  #story/um-dia
       const h = String(window.location.hash || '');
       if (!h) return '';
       if (h.startsWith('#story=')) return decodeURIComponent(h.replace('#story=', ''));
@@ -2027,8 +1610,6 @@
 
     function openStory(item) {
       if (!item) return;
-
-      // slug obrigatório pra navegar
       const slug = safeSlug(item.story || '');
       if (!slug) return;
 
@@ -2041,7 +1622,6 @@
     function openStoryBySlug(slug) {
       const item = findStoryItemBySlug(slug);
       if (!item) return;
-
       currentStory = item;
       renderStoryPage(item);
     }
@@ -2056,20 +1636,17 @@
       const heroImg = getImageValue(item.url);
       if (heroImgEl) heroImgEl.src = heroImg || getImageValue(siteData.aboutImage) || '';
 
-      // título da página: storyTitle > title > "História"
       const title = (item.storyTitle && String(item.storyTitle).trim())
         ? item.storyTitle
         : ((item.title && String(item.title).trim()) ? item.title : 'História');
 
       if (heroTitleEl) heroTitleEl.textContent = title;
 
-      // subtitle opcional (se quiser usar no futuro)
       if (heroSubEl) {
         heroSubEl.style.display = 'none';
         heroSubEl.textContent = '';
       }
 
-      // texto longo com parágrafos
       const txt = (item.storyText && String(item.storyText).trim()) ? String(item.storyText) : '';
       if (storyTextEl) {
         if (!txt) {
@@ -2084,7 +1661,6 @@
         }
       }
 
-      // galeria extra da história
       const imgs = Array.isArray(item.storyImages) ? item.storyImages : [];
       const valid = imgs
         .map(function(x){ return getImageValue(x); })
@@ -2102,7 +1678,6 @@
         }
       }
 
-      // CTA whatsapp dentro da story
       const wa = (siteData.whatsapp || '').toString().replace(/\D/g,'');
       const waLink = document.getElementById('storyCtaWhatsapp');
       if (waLink) waLink.href = 'https://wa.me/' + wa;
@@ -2110,12 +1685,10 @@
 
     // ========== LOAD SITE ==========
     function loadSite() {
-      // Logo
-     const parts = (siteData.siteName || '').split(' ');
-const logoHtml = parts.slice(0, 2).join(' ') + ' <span>' + parts.slice(2).join(' ') + '</span>';
+      const parts = (siteData.siteName || '').split(' ');
+      const logoHtml = parts.slice(0, 2).join(' ') + ' <span>' + parts.slice(2).join(' ') + '</span>';
       document.querySelectorAll('.logo').forEach(function(el) { el.innerHTML = logoHtml; });
 
-      // Hero + Sobre
       document.getElementById('heroTitle').textContent = siteData.heroTitle || defaultData.heroTitle;
       document.getElementById('heroSubtitle').textContent = siteData.heroSubtitle || defaultData.heroSubtitle;
 
@@ -2126,28 +1699,16 @@ const logoHtml = parts.slice(0, 2).join(' ') + ' <span>' + parts.slice(2).join('
         .map(function(p) { return '<p>' + p.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>'; })
         .join('');
 
-      // Galeria + Serviços
       loadGallery();
       loadServices();
 
-      // Botões da seção "Vamos Conversar"
-document.getElementById('contactLinks').innerHTML =
-  '<a href="https://wa.me/' + String(siteData.whatsapp || '').replace(/\\D/g,'') + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
-  '<a href="https://instagram.com/' + (siteData.instagram || '') + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>' +
+      // ✅ Botões da seção "Vamos Conversar?" (HOME)
+      const wa = String(siteData.whatsapp || '').replace(/\D/g,'');
+      document.getElementById('contactLinks').innerHTML =
+        '<a href="https://wa.me/' + wa + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
+        '<a href="https://instagram.com/' + (siteData.instagram || '') + '" class="contato-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>';
 
-      // Contato page links
-      document.getElementById('contactWhatsappLink').href = 'https://wa.me/' + String(siteData.whatsapp || '').replace(/\D/g,'');
-      document.getElementById('contactWhatsappLink').textContent = formatPhone(siteData.whatsapp);
-
-      document.getElementById('contactEmailLink').href = 'mailto:' + siteData.email;
-      document.getElementById('contactEmailLink').textContent = siteData.email;
-
-      document.getElementById('contactInstaLink').href = 'https://instagram.com/' + siteData.instagram;
-      document.getElementById('contactInstaLink').textContent = '@' + siteData.instagram;
-
-      document.getElementById('socialInsta').href = 'https://instagram.com/' + siteData.instagram;
-
-      // CTA section
+      // CTA section texts
       const ctaTitleEl = document.querySelector('.contato-section h2');
       const ctaSubEl = document.querySelector('.contato-section p');
       if (ctaTitleEl) ctaTitleEl.textContent = siteData.ctaTitle || defaultData.ctaTitle;
@@ -2163,7 +1724,6 @@ document.getElementById('contactLinks').innerHTML =
       const copyEl = document.getElementById('footerCopyright');
       if (copyEl) copyEl.innerHTML = '&copy; ' + new Date().getFullYear() + ' ' + (siteData.siteName || defaultData.siteName) + ' &mdash; Todos os direitos reservados';
 
-      // Service detail pages text/features
       loadServiceDetailPages();
 
       // Colors
@@ -2173,20 +1733,11 @@ document.getElementById('contactLinks').innerHTML =
         document.documentElement.style.setProperty('--cor-destaque', siteData.colors.accent || defaultData.colors.accent);
       }
 
-      // Se o hash já veio com story, abre direto
       const slug = getStorySlugFromHash();
       if (slug) {
         openStoryBySlug(slug);
         navigateTo('story');
       }
-    }
-
-    function formatPhone(raw) {
-      if (!raw) return '';
-      const s = String(raw).replace(/\D/g, '');
-      const m = s.match(/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/);
-      if (!m) return '+' + s;
-      return '+' + m[1] + ' ' + m[2] + ' ' + m[3] + '-' + m[4];
     }
 
     function loadServiceDetailPages() {
@@ -2299,25 +1850,11 @@ document.getElementById('contactLinks').innerHTML =
       }
     }
 
-    // helper para onclick inline (sem serializar objeto)
     function openStoryByIndex(i) {
       const items = Array.isArray(siteData.gallery) ? siteData.gallery : [];
       const item = items[i];
       if (!item) return;
       openStory(item);
-    }
-
-    // ========== FORMS ==========
-    function handleContactForm(e) {
-      e.preventDefault();
-      alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
-      e.target.reset();
-    }
-
-    function handleBookingForm(e) {
-      e.preventDefault();
-      alert('Solicitação de agendamento recebida! Entrarei em contato para confirmar.');
-      e.target.reset();
     }
 
     // ========== SCROLL EFFECTS ==========
@@ -2341,7 +1878,6 @@ document.getElementById('contactLinks').innerHTML =
 
     window.addEventListener('scroll', handleScroll);
 
-    // Se mudar o hash (ex: colou link direto), abre story
     window.addEventListener('hashchange', function() {
       const slug = getStorySlugFromHash();
       if (slug) {
