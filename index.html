@@ -2111,8 +2111,8 @@
     // ========== LOAD SITE ==========
     function loadSite() {
       // Logo
-      const parts = (siteData.siteName || '').split(' ');
-      const logoHtml = parts[0] + (parts[1] ? ' <span>' + parts.slice(1).join(' ') + '</span>' : '');
+     const parts = (siteData.siteName || '').split(' ');
+const logoHtml = parts.slice(0, 2).join(' ') + ' <span>' + parts.slice(2).join(' ') + '</span>';
       document.querySelectorAll('.logo').forEach(function(el) { el.innerHTML = logoHtml; });
 
       // Hero + Sobre
